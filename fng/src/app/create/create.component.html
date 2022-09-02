@@ -1,0 +1,48 @@
+<div class="container">
+    <h1>Create Product</h1>
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()" novalidate>
+        <!-- <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" formControlName="fullname" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>User Name</label>
+            <input type="text" formControlName="username" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control">
+        </div> -->
+        <div class="form-group">
+          <label for="fullname">Fullname: </label>
+          <input type="text" class="form-control" placeholder="Enter your fullname..." formControlName='fullname' name="fullname">
+          <div *ngIf="userForm.get('fullname').invalid && (userForm.get('fullname').dirty || userForm.get('fullname').touched)" class="alert alert-danger">****Fullname is Required****</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <input type="email" class="form-control" placeholder="Enter your email address..." formControlName='email' name="email">
+          <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)" class="alert alert-danger">****Email is Required****</div>
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username: </label>
+          <input type="text" class="form-control" placeholder="Type a unique username" formControlName="username" name="username">
+          <div *ngIf="userForm.get('username').invalid && (userForm.get('username').dirty || userForm.get('username').touched)" class="alert alert-danger">****Unique username is Required****</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password: </label>
+          <input type="password" class="form-control" placeholder="Type a password..." formControlName='password' name="password">
+          <div *ngIf="userForm.get('password').invalid && (userForm.get('password').dirty || userForm.get('password').touched)">
+              <div *ngIf="userForm.get('password').errors.required" class="alert alert-danger">****Password is Required****</div>
+              <div *ngIf="userForm.get('password').errors.minlength || userForm.get('password').errors.maxlength" class="alert alert-danger">****Password length have to be between 6 to 32****</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" style="margin-bottom: 10px;">Submit</button>
+    </form>
+</div>

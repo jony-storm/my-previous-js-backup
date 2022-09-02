@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Circle Animation Using Canvas</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+		}
+
+		html, body {
+			overflow: hidden;
+		}
+
+		canvas {
+			border:1px solid black;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas">
+		your browser doesn't support canvas so please upgrade your browser
+	</canvas>
+
+	<script>
+		let canvas = document.getElementById('myCanvas')
+		canvas.width = window.innerWidth
+
+		canvas.height = window.innerHeight
+		let ctx = canvas.getContext('2d')
+
+		console.log(canvas.width + " " + canvas.height)
+		function create_circle() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+			for(let i = 0; i < 30; i++) {
+				let radius = Math.random() * 30 + 10
+				let x = Math.random() * window.innerWidth + 1
+				let y = Math.random() * window.innerHeight + 1
+				ctx.beginPath()
+				ctx.arc(x, y, radius, 0, Math.PI * 2)
+				ctx.lineWidth = 3
+				ctx.fillStyle = 'dodgerblue'
+				ctx.strokeStyle = 'purple'
+				ctx.fill()
+				ctx.stroke()
+				ctx.closePath()
+			}
+		}
+		time = setInterval(create_circle, 300)
+	</script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creating a calendar</title>
+	<style>
+		table {
+			 width: 500px;
+			 margin:auto;
+			 font-size: 20px;
+			 border-collapse: collapse;
+		    }
+
+		    th, td {
+		      width:40px;
+		      height:40px;
+		      text-align: center;
+		    }
+
+		    td {
+		      border:2px solid white;
+		    }
+
+		    th {
+		      text-align: center;
+		      background-color: dodgerblue;
+		    }
+
+		    tr:nth-child(even) {
+		    	background-color: lightgray;
+		    }
+
+		    tr:nth-child(odd) {
+		    	background-color: lightgreen;
+		    }
+		    .highlight {
+		    	background-color: violet;
+		    	/*border:2px solid gray;*/
+		    	font-weight: bold;
+		    }
+
+		    input {
+		    	padding:5px;
+		    }
+
+		    .container {
+		    	width: 300px;
+		    	height:auto;
+		    	display: grid;
+		    	grid-template-columns: 1fr 1fr;
+		    	grid-template-rows: 1fr 1fr;
+		    	grid-auto-flow: row;
+		    	grid-gap: 10px;
+		    	justify-content: center;
+		    	align-content: space-around;
+		    	margin:auto;
+		    	margin-bottom: 20px;
+		    	margin-top: 20px;
+		    }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<label for="m_n">Month_num: </label>
+		<input type="number" id="m_n" title="You must input a value which is greate than or equal to 0 and less than 11!" value="0">
+		<label for="y_n">Year_num : </label>
+		<input type="number" id="y_n" title="You must input a value which is greate than or equal to 0" value="2020">
+		<label for=""></label>
+		<input type="submit" value="Create Calendar" id="c_cal" onclick="createCalendar()">
+		<input type="button" value="Previous Month" id="p_month" onclick="previous_month()">
+		<input type="button" value="Next Month" id="n_month" onclick="next_month()">
+	</div>
+	<table id="tb">
+		<caption>Calendar: <strong>Month, Year</strong></caption>
+		<tr>
+			<th>Sun</th>
+			<th>Mon</th>
+			<th>Tue</th>
+			<th>Wed</th>
+			<th>Thu</th>
+			<th>Fri</th>
+			<th>Sat</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<script>
+		var tr = tb.querySelectorAll('tr')
+		var len = tr.length
+		var col_len = tr[0].length
+		for(let i = 1; i < len; i++) {
+			tr[i].children[5].style.color = "red"
+			tr[i].children[6].style.color = "red"
+		}
+
+
+		let month_name_arr = ["Jan", "Feb", "March", "April", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+		let num_of_day = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+		//this function will insert day of month
+		function insertDay(month_num, year) {
+			let day = 1
+			//creating the first day of a specified month
+			let date = new Date(year, month_num, 1)
+			let day_num = date.getDay()
+
+			//checking if this year is a leap-year
+			if(month_num == 1 && ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))) {
+				num_of_day[1] = 29
+			}
+
+			//fill the table cell where needed
+			function fill_cell() {
+				let d_len = tr[1].childElementCount
+				for(let row = 1; row < len; row++) {
+					for(let d = day_num; d < d_len; d++) {
+						if(day <= num_of_day[month_num]) {
+							// console.log("inside first loop: " + day)
+							tr[row].children[d].innerText = day
+							day += 1
+						} else {
+							return
+						}
+					}
+					day_num = 0
+				}
+
+				//this is for looping the days from start again if overflowed
+				// console.log("after first loop end: " + day)
+				if (day <= num_of_day[month_num]) {
+					for(let row = 1; row < len; row++) {
+						for(let d = day_num; d < d_len; d++) {
+							if(day <= num_of_day[month_num]) {
+								// console.log("inside second loop: " + day)
+								tr[row].children[d].innerText = day
+							    day += 1
+							} else {
+								return
+							}
+						} 
+						day_num = 0
+					}
+				}
+			}
+
+			fill_cell()
+
+			tb.querySelector('caption').querySelector('strong').innerHTML = month_name_arr[month_num] + ", " + year
+
+			//this function will highlight today's date
+			function highlightToday() {
+				let date = new Date()
+				let day = date.getDate()
+				let month = date.getMonth()
+				let fullyear = date.getFullYear()
+				if(month_num == month && year == fullyear) {
+					/*for(let row = 1; row < len; row++) {
+						for(let d = 0; d < col_len; d++) {
+							if(tr[row].children[d].innerText == day) {
+								tr[row].children[d].style.backgroundColor = "dodgerblue"
+							}
+						}
+					}*/
+					console.log("This is the current month" + month_num + " " + year)
+					tr[5].children[1].style.backgroundColor = 'dodgerblue'
+				}
+			}
+
+		highlightToday()
+		}
+
+		//empty the whole table before filling the cell not workable
+		/*function empty_cell() {
+			for(let row = 1; row < len; row++) {
+				for(let col = 0; col < col_len; col++) {
+					if(tr[row].children[col].innerText != "") {
+						tr[row].children[col].innerText = ""
+					}
+				}
+			}
+		}*/
+
+		//empty the whole table before filling the cell workable
+		function empty_cell() {
+			let tr = document.getElementsByTagName('tr')
+			for(let i = 1; i < 6; i++) {
+				for(let j = 0; j < 7; j++) {
+					tr[i].children[j].innerText = ""
+				}
+			}
+		}
+
+		//this function will create the calendar onclick event
+		function createCalendar() {
+			let m = parseInt(m_n.value)
+			let y = parseInt(y_n.value)
+			empty_cell()
+			insertDay(m, y)
+		}
+
+
+		//this is for calculating previous month
+		function previous_month() {
+			let month_num =  parseInt(m_n.value)
+			let year_num = parseInt(y_n.value)
+			if(month_num == 0) {
+				year_num = year_num - 1
+				month_num =  11
+				m_n.value = month_num
+				y_n.value = year_num
+			} else {
+				month_num = month_num - 1
+				m_n.value = month_num
+			}
+			empty_cell()
+			insertDay(month_num, year_num)
+
+		}
+
+		//this is for calculating next month
+		function next_month() {
+			let month_num = parseInt(m_n.value)
+			let year_num = parseInt(y_n.value)
+			if(month_num == 11) {
+				year_num = year_num + 1
+				month_num =  0
+				m_n.value = month_num
+				y_n.value = year_num
+			} else {
+				month_num = month_num + 1
+				m_n.value = month_num
+			}
+			empty_cell()
+			insertDay(month_num, year_num)
+
+		}
+
+
+		insertDay(0, 2020)
+
+		let selectedTD;
+		//for hightlight on mouseover
+		tb.onmouseover = function(evt) {
+			let target = evt.target
+			if(target.tagName != 'TD') {
+				return
+			} else if(target.innerText != "" && target.tagName == "TD") {
+				target.classList.add('highlight')
+				target.onclick = function() {
+					target.style.backgroundColor = "violet"
+				}
+			}
+		}
+
+		//for removing highlight on mouseout
+		tb.onmouseout = function(evt) {
+			let target = evt.target
+			if(target.tagName != 'TD') 
+				return
+			else if(target.innerText != "" && target.tagName == "TD") 
+				target.classList.remove('highlight')
+		}
+	</script>
+</body>
+</html>

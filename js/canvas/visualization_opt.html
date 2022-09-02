@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creating Tree Visualization</title>
+	<style>
+		* {
+			margin: 0;
+			padding:0;
+		}
+
+		html, body {
+			overflow: hidden;
+		}
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas">
+		Your Browser Doesn't Support Canvas So Please Upgrade Your Browser!!
+	</canvas>
+	<script>
+		let canvas = document.getElementById('myCanvas')
+		canvas.width = window.innerWidth
+		canvas.height = window.innerHeight
+		let c = canvas.getContext('2d')
+		c.globalCompositeOperation = 'destination-out'
+		var c_x = 500
+		var c_y = 100
+		function drawCircle(cx, cy, r, txt, fillS='dodgerblue', strokeW=3, strokeS='purple') {
+			c.beginPath()
+			c.lineWidth = strokeW
+			c.strokeStyle = strokeS
+			c.fillStyle = fillS
+			c.arc(cx, cy, r, 0, Math.PI * 2)
+			c.stroke()
+			c.fill()
+			c.strokeStyle = 'black'
+			c.lineWidth = 1
+			c.textBaseLine = 'middle'
+			c.font = 'bold 20px serif'
+			c.fillStyle = 'black'
+			c.fillText(txt,(cx - r / 2),(cy + 10))
+			c.closePath()
+			c_x = cx
+			c_y = cy
+
+		}
+
+		let x_2 = 0
+		let y_2 = 0
+		function drawLine(x1, y1, x2, y2, width=3, color='gray') {
+			c.beginPath()
+			c.lineWidth = width
+			c.strokeStyle = color
+			c.moveTo(x1, y1)
+			c.lineTo(x2, y2)
+			c.stroke()
+			c.closePath()
+			x_2 = x2
+			y_2 = y2
+		}
+
+		var graph_data = [{node_name:"Alice", edges:["Bob", "Dill"]}, {node_name:"Bob", edges:["Hob", "Charles"]}, {node_name:"Dill", edges:["Nick", "Amy"]}, {node_name:"Hob", edges:["Charlie", "Ashley"]}]
+		
+		/*for(let i = 0; i < graph_data.length; i++) {
+			
+		}*/
+		c.fillStyle = "rgb(63, 169, 245)";
+		c.fillRect(50, 50, 100, 100);
+		c.globalCompositeOperation = "source-over";
+		c.fillStyle = "rgb(255, 123, 172)";
+		c.fillRect(100, 100, 100, 100);
+	</script>
+</body>
+</html>

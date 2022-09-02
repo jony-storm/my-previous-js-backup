@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creating Tree Visualization</title>
+	<style>
+		* {
+			margin: 0;
+			padding:0;
+		}
+
+		html, body {
+			overflow: hidden;
+		}
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas">
+		Your Browser Doesn't Support Canvas So Please Upgrade Your Browser!!
+	</canvas>
+	<script>
+		let canvas = document.getElementById('myCanvas')
+		canvas.width = window.innerWidth
+		canvas.height = window.innerHeight
+		let c = canvas.getContext('2d')
+		var c_x = 0
+		var c_y = 0
+		function drawCircle(cx, cy, r, txt, fillS='dodgerblue', strokeW=3, strokeS='purple') {
+			c.beginPath()
+			c.lineWidth = strokeW
+			c.strokeStyle = strokeS
+			c.fillStyle = fillS
+			c.arc(cx, cy, r, 0, Math.PI * 2)
+			c.stroke()
+			c.fill()
+			c.strokeStyle = 'black'
+			c.lineWidth = 1
+			c.textBaseLine = 'middle'
+			c.font = 'bold 20px serif'
+			c.fillStyle = 'black'
+			c.fillText(txt,(cx - r / 2),(cy + 10))
+			c.closePath()
+			c_x = cx
+			c_y = cy
+		}
+
+		function drawLine(x1, y1, x2, y2, width=3, color='gray') {
+			c.beginPath()
+			c.lineWidth = width
+			c.strokeStyle = color
+			c.moveTo(x1, y1)
+			c.lineTo(x2, y2)
+			c.stroke()
+			c.closePath()
+		}
+
+		var graph_data = [{node_name:"Alice", edges:["Bob", "Charles"]}, {node_name:"Bob", edges:["Dill", "Charlie"]}]
+		let pos = 300
+		// drawLine(x1=c_x, y1=c_y, x2=200, y2=200, width=3, color='gray')
+		drawCircle(pos, 200, 45, graph_data[0].node_name)
+		pos += 100
+		drawLine(c_x, c_y, pos, pos)
+		drawLine(c_x, c_y, pos - 200, pos)
+		drawCircle(pos, pos, 45, graph_data[0].edges[0])
+		drawCircle(pos - 200, pos, 45, graph_data[0].edges[1])
+		
+
+
+	</script>
+</body>
+</html>
+
+<!-- let clip = context.drawImage(image,pos_x - 10, pos_y - 10, 20, 20, pos_x - 10, pos_y - 10, 20, 20) -->
+
+
+<!-- c.globalCompositeOperationProperty = 'destination-atop'
+		drawCircle(pos, pos, 45, graph_data[0].node_name)
+		// drawLine(angle=45, width=5, color='black', x1=c_x, y1=c_y, x2=200, y2=50)
+		drawLine(90, 5, 'gray', c_x, c_y, 100, 250)
+		drawLine(45, 5, 'gray', c_x, c_y, 300, 450)
+
+ -->

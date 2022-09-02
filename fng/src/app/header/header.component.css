@@ -1,0 +1,56 @@
+header  {
+    background-color: #F8F8F8;
+    box-shadow:  2px 2px 5px gray;
+}
+header  ul  {
+    margin: 0;
+}
+
+header  a, header  li  {
+    padding: 1.4rem  0;
+    color: #777;
+    font-weight: bold;
+}
+
+
+a {
+    text-decoration: none;
+    margin-left:5px;
+}
+
+#nav_itm li a:hover {
+    color: rgba(0, 0, 0, 0.7);
+    text-decoration: none;   
+}
+
+.row .brand {
+    font-size: 20px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.row .brand:hover {
+    color:rgba(0, 0, 0, 0.6);
+}
+
+.row .active {
+  color:dodgerblue;
+}
+li .active {
+  color:dodgerblue;
+}
+div#menu_icon {
+    /*padding:1.5rem  0;*/
+    padding:20px;
+}
+
+div#menu_icon:hover {
+    cursor:pointer;
+}
+
+div#menu_icon .menu_bar {
+    width: 20px;
+    height:3px;
+    margin:3px auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}

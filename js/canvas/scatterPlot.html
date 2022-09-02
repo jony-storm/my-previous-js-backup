@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+		}
+
+		canvas {
+			border: 1px solid black;
+			margin:auto;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canv"></canvas>
+	<script>
+		let c = canv.getContext('2d')
+		canv.width = '500'
+		canv.height = '500'
+
+		let friends = [ 70, 100, 72, 90, 80, 64, 120, 75, 140, 150, 20]
+		let minutes = [175, 170, 205, 120, 220, 130, 105, 145, 190, 140, 50]
+		let labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+
+		c.beginPath()
+		c.moveTo(60, 10)
+		c.lineTo(60, 450)
+		c.lineTo(550, 450)
+		c.strokeStyle = 'blue'
+		c.stroke()
+		c.closePath()
+		// console.log(scatter)
+		let f_len = friends.length
+		let m_len = minutes.length
+		let l_len = labels.length
+
+		let first_label_vertical = 80
+		let first_label_pos_y = 455
+
+		let first_tick_pos_x = 55
+		let first_tick_pos_y = 450
+
+		c.font = "15px serif"
+		for(let i = 0; i < 9; i++) {
+			c.fillText(first_label_vertical, 20, first_label_pos_y)
+			c.beginPath()
+			c.moveTo(first_tick_pos_x, first_tick_pos_y)
+			c.lineTo(first_tick_pos_x + 10, first_tick_pos_y)
+			c.stroke()
+			c.closePath()
+			first_tick_pos_y -= 50
+			first_label_vertical += 20
+			first_label_pos_y -= 50
+		}
+
+		let first_label_horizontal = 60
+		let first_label_pos_hori_x = 50
+
+		let first_tick_hori_pos_x = 60
+		let first_tick_hori_pos_y = 450
+
+		for(let i = 0; i < 9; i++) {
+			c.fillText(first_label_horizontal, first_label_pos_hori_x, 470)
+			c.beginPath()
+			c.moveTo(first_tick_hori_pos_x, first_tick_hori_pos_y - 5)
+			c.lineTo(first_tick_hori_pos_x, first_tick_hori_pos_y + 5)
+			c.stroke()
+			c.closePath()
+			first_tick_hori_pos_x += 50
+			first_label_horizontal += 20
+			first_label_pos_hori_x += 50
+		}
+
+		/*let friends = [ 70, 100, 72, 90, 80, 64, 120, 75, 60]
+		let minutes = [175, 170, 205, 120, 220, 130, 105, 145, 190]
+		let labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']*/
+
+		c.translate(60, 450)
+		for(let i = 0; i < f_len; i++) {
+			c.lineWidth = 3
+			c.beginPath()
+			c.strokeStyle = 'green'
+			c.arc(friends[i] + 50, -minutes[i] - 50, 5, 0, Math.PI * 2)
+			c.stroke()
+			c.closePath()
+		}
+		
+		c.setTransform(1, 0, 0, 1, 0, 0)
+		c.fillStyle = 'green'
+		c.strokeRect(398, 30, 90, 55)
+		c.fillRect(408, 35, 20, 20)
+		c.fillText("Green" , 408 + 20 +5, 40 + 10)
+		c.fillStyle = 'red'
+		c.fillRect(408, 35 + 20 + 5, 20, 20)
+		c.fillText("Red" , 408 + 20 +5, 40+ 20+ 13)
+	</script>
+</body>
+</html>

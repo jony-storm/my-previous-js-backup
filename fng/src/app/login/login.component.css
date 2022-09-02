@@ -1,0 +1,38 @@
+form {
+  width: 400px;
+  min-height: 250px;
+  padding:20px;
+  margin:100px auto;
+  background-color: #e7e8ee;
+  border-radius: 10px;
+}
+
+.container-fluid {
+  background-image: url('../../assets/imgs/Mountains_Scenery_Grasslands_Grass_Hill_511966_1920x1080.jpg');
+  background-size: cover;
+}
+
+#remember_me {
+  margin-right:5px;
+}
+
+#sign_up {
+  /*text-align: center;*/
+  position: relative;
+  bottom: -10px;
+}
+
+#sign_up a:hover {
+  text-decoration: underline;
+  color:rgba(0,0, 255, 0.03);
+  font-weight: bold;
+}
+
+.form-control {
+  border:1px solid #6e6666 !important;
+}
+
+.btn-primary {
+  position: relative;
+  bottom: 30px
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Creating a grid</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        html, body {
+            overflow: hidden;
+        }
+
+        #myCanvas {
+            display: block;
+            border:1px solid black;
+            background-color: #001022;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas">
+        your browser doesn't support canvas
+    </canvas>
+    <script>
+        let canvas = document.getElementById('myCanvas')
+        let ctx = canvas.getContext('2d')
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        let w = canvas.width / 2 + 100
+        let h = canvas.height - 50
+
+        ctx.strokeStyle = 'white'
+        
+        // main vertical line
+        ctx.beginPath()
+        ctx.moveTo(w, 20)
+        // height of main line is 'h='
+        ctx.lineTo(w, h)
+        ctx.stroke()
+        ctx.closePath()
+
+        //draw flag
+        ctx.fillStyle = 'green'
+        ctx.fillRect(w, 20, 80, 40)
+        ctx.beginPath()
+        ctx.arc(w + 40, 40, 10, 0, Math.PI * 2)
+        ctx.fillStyle = 'red'
+        ctx.fill()
+        ctx.closePath()
+
+        //draw the rotated square
+        ctx.lineWidth = 5
+        ctx.beginPath()
+        ctx.moveTo(w, 300)
+        ctx.lineTo(w + 25, 330)
+        ctx.lineTo(w, 360)
+        ctx.lineTo(w - 25, 330)
+        ctx.lineTo(w, 300)
+        ctx.fillStyle = '#001022'
+        ctx.fill()
+        ctx.stroke()
+        ctx.closePath()
+
+        ctx.lineWidth = 1
+        // finding x coordinate on the previous slanted line
+        function find_X_Coord(y, x1, y1, x2, y2) {
+            return (((x1 - x2)*(y - y1)) / (y1 - y2)) + x1
+        }
+
+        //line start
+
+        // initial values 
+        let x1 = w
+        let y = 50 + 50
+        let y1 = y
+        let x2 = w - 50
+        let y2 = h
+
+        // draw first left slanted line
+        ctx.beginPath()
+        ctx.moveTo(x1, y1)
+        ctx.lineTo(x2,y2)
+        ctx.stroke()
+        ctx.closePath()
+        //draw first right slanted line
+        ctx.beginPath()
+        ctx.moveTo(x1, y1)
+        ctx.lineTo(x2,y2)
+        ctx.stroke()
+        ctx.closePath()
+
+        // previous values
+        let pre_x1 = x1 
+        let pre_y1 = y1
+        let pre_x2 = x2
+        let pre_y2 = y2
+        y += 50
+        let lineCount = 8
+        let rightSideLineX = []
+        let leftSideLineX = []
+
+        //first left slanted stair
+        ctx.beginPath()
+        ctx.moveTo(w - 50, h)
+        ctx.lineTo(w, h - 20)
+        ctx.stroke()
+        ctx.closePath()
+        //draw first right slanted stair
+        ctx.beginPath()
+        ctx.moveTo(w + 50, h)
+        ctx.lineTo(w, h - 20)
+        ctx.stroke()
+        ctx.closePath()
+
+        for(let i = 0; i < lineCount; i++) {
+            x1 = find_X_Coord(y, pre_x1, pre_y1, pre_x2, pre_y2)
+            leftSideLineX.push(x1)
+            ctx.beginPath()
+            y1 = y
+            x2 = pre_x2 - 50
+            ctx.moveTo(x1, y1)
+            ctx.lineTo(x2, y2)
+            ctx.stroke()
+            ctx.closePath()
+
+            //draw leftside stair
+            ctx.beginPath()
+            ctx.moveTo(x2, y2)
+            ctx.lineTo(find_X_Coord(h - 20, pre_x1, pre_y1, pre_x2, pre_y2),h - 20)
+            ctx.stroke()
+            ctx.closePath()
+            // update previous values
+            pre_x1 = x1
+            pre_y1 = y1
+            pre_x2 = x2
+            // update y
+            y += 50
+        }
+
+        //right side of the memorial
+        x1 = w
+        y = 50 + 50
+        y1 = y
+        x2 = w + 50
+        y2 = h
+
+        ctx.beginPath()
+        ctx.moveTo(x1, y1)
+        ctx.lineTo(x2,y2)
+        ctx.stroke()
+        ctx.closePath()
+
+        pre_x1 = x1 
+        pre_y1 = y1
+        pre_x2 = x2
+        pre_y2 = y2
+        y += 50
+        for(let i = 0; i < lineCount; i++) {
+            x1 = find_X_Coord(y, pre_x1, pre_y1, pre_x2, pre_y2)
+            rightSideLineX.push(x1)
+            ctx.beginPath()
+            y1 = y
+            x2 = pre_x2 + 50
+            ctx.moveTo(x1, y1)
+            ctx.lineTo(x2, y2)
+            ctx.stroke()
+            ctx.closePath()
+
+            ctx.beginPath()
+            ctx.moveTo(x2, y2)
+            ctx.lineTo(find_X_Coord(h - 20, pre_x1, pre_y1, pre_x2, pre_y2),h - 20)
+            ctx.stroke()
+            ctx.closePath()
+            // update previous values
+            pre_x1 = x1
+            pre_y1 = y1
+            pre_x2 = x2
+            // update y
+            y += 50
+        }
+    </script>
+</body>
+</html>

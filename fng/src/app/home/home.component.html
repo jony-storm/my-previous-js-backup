@@ -1,0 +1,19 @@
+<section id="intro-header">
+    <div class="container">
+       <div class="row">
+           <div class="wrap-headline">
+                <h1 class="text-center">Create a website</h1>
+                <h2 class="text-center">So easily with Angular</h2>
+                <h2 *ngIf='!userService.isLoggedin' class="text-center username">Hello, <span style="color:#0dc5a3;font-size:30px;">Stranger</span></h2>
+                <h2 *ngIf='userService.isLoggedin' class="text-center username">Hello, <span style="color:#0dc5a3;font-size:30px;">{{ userService.username }}</span></h2>
+                <hr>
+                <ul class="list-inline list-unstyled text-center">
+                    <li>
+                        <a [routerLink]="'/login'" [routerLinkActive]="'active-route'" [routerLinkActiveOptions]='{exact:true}' class="btn btn-default btn-lg" role="button">Log in</a>
+                        <a [routerLink]="'/sign_up'" [routerLinkActive]="'active-route'" [routerLinkActiveOptions]='{exact:true}' class="btn btn-primary btn-lg" role="button">Sign up</a>
+                    </li>
+                </ul>
+           </div>
+       </div>
+   </div>
+</section>

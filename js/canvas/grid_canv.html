@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creating a grid</title>
+	<style>
+		#myCanvas {
+			border:1px solid gray;
+			/*background-color: black;*/
+		}
+
+		.canv {
+			border:1px solid gray;
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" class="canv" width="500" height="500">
+		your browser doesn't support canvas
+	</canvas>
+	<canvas id="myCanvas2" class="canv" width="500" height="500">
+		your browser doesn't support canvas
+	</canvas>
+	<canvas id="myCanvas3" class="canv" width="500" height="500">
+		your browser doesn't support canvas
+	</canvas>
+	<script>
+       	let canvas = document.getElementById('myCanvas')
+       	let ctx = canvas.getContext('2d')
+       	for(let i = 0; i < 500; i+=10) {
+       		ctx.moveTo(i, i)
+       		ctx.lineTo(0, 500)
+       	}
+       	ctx.strokeStyle = 'blue'
+       	ctx.stroke()
+
+       	for(let i = 499; i >= 0; i-=10) {
+       		ctx.moveTo(i, i)
+       		ctx.lineTo(500, 0)
+       	}
+       	ctx.strokeStyle = 'green'
+       	ctx.stroke()
+
+       	let canvas2 = document.getElementById('myCanvas2')
+		let ctx2 = canvas2.getContext('2d')
+		function create_grid(starting_val, grid_gap, grid_len, x_start=0, y_start=0) {
+			for(let i = starting_val; i < grid_len; i += grid_gap) {
+				ctx2.moveTo(i, x_start)
+			       ctx2.lineTo(i, grid_len)
+			}
+			ctx2.strokeStyle = 'blue'
+			ctx2.stroke()
+			for(let i = starting_val; i < grid_len; i += grid_gap) {
+				ctx2.moveTo(y_start, i)
+			    ctx2.lineTo(grid_len, i)
+			}
+			ctx2.strokeStyle = 'green'
+			ctx2.stroke()
+		}
+
+		create_grid(50, 70, 400)
+
+		let canvas3 = document.getElementById('myCanvas3')
+
+		for(let i =)
+	</script>
+
+</body>
+</html>

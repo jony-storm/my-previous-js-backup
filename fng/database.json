@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "fullname": "Evan Ashley",
+      "email": "evan.ash@gmail.com",
+      "username": "evanAsh",
+      "password": "evanash",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "fullname": "Jean Louise",
+      "email": "jean.louise@gmail.com",
+      "username": "jeanny",
+      "password": "jeanny"
+    },
+    {
+      "id": 3,
+      "fullname": "Jeremy Finch",
+      "email": "jeremy.finch@yahoo.com",
+      "username": "jeremy",
+      "password": "jeremy"
+    },
+    {
+      "id": 4,
+      "fullname": "Ava O'Shea",
+      "email": "ava.shea@gmail.com",
+      "username": "avaShea",
+      "password": "avaShea"
+    },
+    {
+      "id": 5,
+      "fullname": "Scarlet Johanson",
+      "email": "sjohanson@gmail.com",
+      "username": "johanson",
+      "password": "sjohanson"
+    },
+    {
+      "id": 6,
+      "fullname": "Julian Nash",
+      "email": "jul.nash@gmail.com",
+      "username": "julnash",
+      "password": "julnash"
+    },
+    {
+      "fullname": "Christopher Nolan",
+      "username": "christNolan",
+      "email": "christ.nolan@gmail.com",
+      "password": "christ",
+      "id": 7
+    }
+  ]
+}

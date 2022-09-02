@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Table with javascript</title>
+	<style>
+		table {
+			width: 500px;
+			margin:auto;
+		}
+		table, th, td {
+			border:2px solid black;
+			border-collapse: collapse;
+		}
+		th, td {
+			width:40px;
+			height:40px;
+			text-align: center;
+		}
+		th {
+			text-align: center;
+			background-color: lightgreen;
+		}
+		.highlight {
+			background-color: pink;
+			outline:2px solid dodgerblue;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<p>February</p>
+	<table>
+	<thead>
+		<tr>
+			<th>Sun</th>
+			<th>Mon</th>
+			<th>Tue</th>
+			<th>Wed</th>
+			<th>Thu</th>
+			<th>Fri</th>
+			<th>Sat</th>
+		</tr>
+	</thead>
+	<tbody id="tb">
+		
+	</tbody>
+	</table>
+	<script>
+		let num = 1
+		let cont = "";
+		for(let row=0; row<5; row++) {
+			cont += "<tr>"
+			for(let col=0; col<7; col++) {
+				cont += "<td>" + num + "</td>"
+				num++;
+			}
+			cont += "</tr>"
+		}
+		tb.innerHTML += cont;
+	</script>
+</body>
+</html>

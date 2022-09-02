@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Animate Object using OOP</title>
+	<style>
+		* {
+			margin:10px;
+			padding:0;
+		}
+
+		canvas {
+			border:1px solid black;
+			display: block;
+			margin:auto;	
+		}
+
+		button {
+			padding:5px;
+		}
+	</style>
+</head>
+<body>
+	<button id="startAnim" onclick="start_animate()">StartAnimation</button>
+	<button id="stopAnim" onclick="stop_animate()">StopAnimation</button>
+	<canvas id="myCanvas"></canvas>
+	<script>
+		let c = myCanvas.getContext('2d')
+		myCanvas.width = '1300'
+		myCanvas.height = '500'
+
+		let w = myCanvas.width
+		let h = myCanvas.height
+
+		let Shape = function(x, y, width, height) {
+			this.x = x
+			this.y = y
+			this.width = width
+			this.height = height
+			this.reverseX = false
+			this.reverseY = false
+		}
+
+		let shapes = new Array()
+		for(let i = 0; i < 10; i++) {
+			let x = Math.random() * 250
+			let y = Math.random() * 350
+			let width = height = Math.random() * 50
+			shapes.push(new Shape(x, y, width, height))
+		}
+
+		let start = true
+		function start_animate() {
+			c.clearRect(0, 0, w, h);
+			var shapesLength = shapes.length;
+			for (var i = 0; i < shapesLength; i++) {
+				var tmpShape = shapes[i];
+				tmpShape.x += Math.random() * 4 - 10;
+				tmpShape.y += Math.random() * 4 - 10;
+
+				if (!tmpShape.reverseX) {
+				tmpShape.x += 10;
+				} else {
+				tmpShape.x -= 10;
+				};
+				if (!tmpShape.reverseY) {
+				tmpShape.y += 10;
+				} else {
+				tmpShape.y -= 10;
+				};
+
+				c.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
+				if(tmpShape.x < 0) {
+					tmpShape.reverseX = false
+				} else if(tmpShape.x + tmpShape.width > w) {
+					tmpShape.reverseX = true
+				}
+
+				if(tmpShape.y < 0) {
+					tmpShape.reverseY = false
+				} else if(tmpShape.y + tmpShape.height > h) {
+					tmpShape.reverseY = true
+				}
+			};
+			if (start) {
+				setTimeout(start_animate, 33);
+			} else {
+				start = true
+			}
+		}
+
+		function stop_animate() {
+			if(start) {
+				start = false
+			}
+		}
+	</script>
+</body>
+</html>

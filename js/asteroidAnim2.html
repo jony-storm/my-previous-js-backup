@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Implementing advanced animation</title>
+<meta charset="utf-8">
+<style>
+	* { 
+		margin: 0; 
+		padding: 0;
+	 }
+	html, body {
+		height: 100%; width: 100%; 
+	}
+	canvas { 
+		display: block; 
+	}
+	#myCanvas {
+		background: #001022;
+		margin:20px;
+	}
+	
+	button {
+		padding:5px;
+		margin:20px;
+	}
+</style>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+	<!-- <button id="startAnim" onclick="start_animate()">StartAnimation</button>
+	<button id="stopAnim" onclick="stop_animate()">StopAnimation</button> -->
+	<script src="asteroid.js">
+		/*var c = myCanvas.getContext('2d')
+		myCanvas.width = '500'
+		myCanvas.height = '500'
+
+		var canvasW = myCanvas.width
+		var canvasH = myCanvas.height
+
+		var Asteroid = function(x, y, radius) {
+			this.x = x
+			this.y = y
+			this.radius = radius
+		}
+
+		var asteroids = new Array()
+
+		for(let i = 0; i < 10; i++) {
+			var x = 20 + (Math.random() * (canvasW - 40))
+			var y = 20 + (Math.random() * (canvasH - 40))
+			var radius = 5 + Math.random() * 10
+			asteroids.push(new Asteroid(x, y, radius))
+		}
+
+		var start = true
+		function start_animate() {
+			c.clearRect(0, 0, canvasW, canvasH)
+			c.fillStyle = "rgb(255, 255, 255)"
+
+			var asteroidsLen = asteroids.length
+
+			for(let i = 0; i < asteroidsLen; i++) {
+				var tmpAsteroid = asteroids[i]
+				c.beginPath()
+				c.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI * 2, false)
+				c.fill()
+				c.closePath()
+			}
+
+			if(start == true) {
+				setTimeout(start_animate, 33)
+			}
+		}
+
+		start_animate()
+		function stop_animate() {
+			if(start == true) {
+				start = false
+			} 
+		}*/
+
+	</script>
+</body>
+</html>

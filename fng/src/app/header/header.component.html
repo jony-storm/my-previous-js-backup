@@ -1,0 +1,25 @@
+<header>
+     <div class="container">
+         <!--    row 1   -->
+          <div class="row">
+              <a class="brand pull-left" [routerLink]="''" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>Create a website</a>
+              <div id="menu_icon" class="visible-xs pull-right">
+                  <div class="menu_bar"></div>
+                  <div class="menu_bar"></div>
+                  <div class="menu_bar"></div>
+              </div>
+              <div class="clearfix visible-xs"></div>
+              <ul id="nav_itm"  class="list-inline list-unstyled pull-right hidden-xs">
+                <li><a [routerLink]="'/about'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>About</a></li>
+                <li><a [routerLink]="'/features'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>Features</a></li>
+                <li><a [routerLink]="'/pricing'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>Pricing</a></li>
+                <li><a [routerLink]="'/contact'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>Contact</a></li>
+                <li><a [routerLink]="'/profile'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>Profile</a></li>
+                <li><a [routerLink]="'/test'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>Test</a></li>
+                <!-- <li><a [routerLink]="'/admin_dashboard'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}'>Admin</a></li> -->
+                <li *ngIf="!userService.isLoggedin"><a [routerLink]="'/login'" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}' style="color:green;">LogIn</a></li>
+                <li *ngIf="userService.isLoggedin"><a [routerLink]="''" [routerLinkActive]="'active'" [routerLinkActiveOptions]='{exact:true}' (click)="logout()" style="color:green;">LogOut</a></li>
+             </ul>
+          </div>
+      </div>
+</header>

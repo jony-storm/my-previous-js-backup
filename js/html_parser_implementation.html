@@ -1,0 +1,82 @@
+<!-- // Fri Nov 20 22:06:16 +06 2020 -->
+
+<script>
+    var ele = {
+        tag: "div",
+        attributes: {class: 'container', id: 'app'},
+        children: [{
+            tag: 'h1',
+            attributes: {class:'header1'},
+            children: ['nothing in it']
+        },
+        {
+            tag: 'h1',
+            attributes: {class:'header1'},
+            children: [{
+                tag: 'span',
+                attributes: {class: 'firstword'},
+                children: 'Environment'
+            }, 'Pollution in Towns']
+        }]
+    }
+</script>
+
+
+<h1 class="header1" id=  
+"special" 
+data-action  ='demo' onclick= '  console.log("hello")'>nothing in it</h1>
+
+
+<div id="app" class="container" required>
+    <h1 class="header1">nothing < in it</h1>
+    <h1 class="header1"><span class="firstword">Environment</span>Pollution Problems in Towns</h1>
+</div>
+
+<p>this is value inside<span class="first">inside first span</span>middle<span class="sec">inside second</span></p>
+<script>
+    // var unknown = str.match(/\[\s*([\w-]+)(\s*=\s*(('\s*(.*)'|"\s*(.*)")|(\S*)))?\s*\]/gm)
+    var str = `<h1 class="header1" id=  
+        "special" 
+        data-action  ='demo' style='color:red;' onclick= '  console.log("hello")'>  nothing in it 248357  </h1>`
+    function create_html(str) {
+            var node = {}
+            var attr = {}
+            var tagName = str.match(/[\s\n\t]*<[\s\n\t]*[a-z]+[1-6]?/)[0].match(/[a-z]+[1-6]?/)[0]
+            node.tagName = tagName
+
+            // var attr_arr = str.match(/[a-z]*[-]?[a-z]*[\s\t\n]*=[\s\t\n]*['"`]?.*['"`]?/gm)
+            var attr_arr = str.match(/[a-z]*[-]?[a-z]*[\s\t\n]*=[\s\t\n]*['"`]?[a-z0-9\s\t\n().-=+:;,{}\[\]]*['"`]?/gm)
+            for(let i = 0; i < attr_arr.length; i++) {
+                let key = attr_arr[i].split("=")[0].trim()
+                let value = attr_arr[i].split("=")[1].split(/['"`]/)[1].trim()
+                attr[key] = value
+            }
+            node.attributes = attr
+
+            var children = []
+            var child_str = str.match(/>.*</gm)[0].split(/>[\s\t\n]*/)[1].split(/[\s\t\n]*</)[0]
+            children.push(child_str)
+            node.children = children
+            return node
+    }
+</script>
+<script>
+    {
+        tagName:'p',
+        attr:{},
+        children: [
+            'this is value inside', 
+            {
+                tagn ame: 'span',
+                attr: {class: 'first'},
+                children: ['inside first span']
+            },
+            'middle',
+            {
+                tagname: 'span',
+                attr: {class: 'sec'},
+                children: ['inside second']
+            }
+        ]
+    }
+</script>

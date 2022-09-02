@@ -1,0 +1,249 @@
+// Tue Nov 24 15:42:51 +06 2020
+/*watch?v=obWXjtg0L64
+thmoomisabbbbbcbbbbbathatatcouldnotbe
+dabbbcbbba*/
+
+
+/*
+> create_palindrome_str(10)
+'csrnyynrsc'
+> create_palindrome_str(10)
+'ietniintei'
+> create_palindrome_str(5)
+'evwve'
+> create_palindrome_str(50)
+'cpspsexrlheesrekgjyhduvyggyvudhyjgkerseehlrxespspc'
+'cpspsexrlheesrekgjyhdu|vyggyv|udhyjgkerseehlrxespspc'
+> 
+
+*/
+function create_palindrome_str(len) {
+    let palindrome_arr = []
+    let loop_len = len / 2
+
+    function getRandomBetTwoValue(min, max) {
+        return Math.floor(Math.random() * (max - min) + min)
+    }
+
+    
+    for(let i = 0; i < loop_len; i++) {
+        palindrome_arr.push(String.fromCodePoint(getRandomBetTwoValue(97, 122)))
+    }
+
+    if(len % 2 == 0) {
+        return palindrome_arr.join("") + palindrome_arr.reverse().join("")
+    } else {
+        let sliced = palindrome_arr.slice(0, loop_len)
+        return sliced.join("") + String.fromCodePoint(getRandomBetTwoValue(97, 122)) + sliced.reverse().join("")
+    }
+}
+
+function create_rand_str() {
+    let str = ""
+    let len = getRandomBetTwoValue(min, max)
+    for(let i = 0; i < len; i++) {
+        str += palindrome_arr.push(String.fromCodePoint(getRandomBetTwoValue(97, 122)))
+    }
+    return str
+}
+
+
+//it takes three inputs datastr length , mininum and maximum palindrome string length. max can be equal to datalen
+function create_palindrome_test_datastr(data_len, p_min, p_max) {
+    //generate random value between two numbers
+    function getRandomBetTwoValue(min, max) {
+        return Math.floor(Math.random() * (max - min) + min)
+    }
+
+    if(data_len == max) {
+        return create_palindrome_str(max)
+    } else if(data_len > max) {
+        let data_str = ""
+        let palindrome_count = getRandomBetTwoValue(2, 10)
+        let total_palindrome_len;
+
+        let palindrome_arr = []
+        for(let i = 0; i < palindrome_count; i++) {
+            palindrome_arr.push(create_palindrome_str())
+            total_palindrome_len += palindrome_arr[i].length
+        }
+
+        if(total_palindrome_len >= data_len) {
+
+        }
+    }
+}
+
+
+function create_palindrome_test_datastr(data_len) {
+    //generate random value between two numbers
+    function getRandomBetTwoValue(min, max) {
+        return Math.floor(Math.random() * (max - min) + min)
+    }
+
+    function create_rand_str(len) {
+        let str = ""
+        for(let i = 0; i < len; i++) {
+            str += String.fromCodePoint(getRandomBetTwoValue(97, 122))
+        }
+        return str
+    }
+
+    let palindrome_arr = []
+    let palindrome_arr_len = getRandomBetTwoValue(1, 5)
+    let total_palindrome_len = 0
+
+    console.log("pal_count: " + palindrome_arr_len)
+    if(palindrome_arr_len == 1) {
+        return create_palindrome_str(data_len)
+    } else {
+        for(let i = 0; i < palindrome_arr_len; i++) {
+            if(total_palindrome_len >= data_len) {
+                break
+            } else {
+                palindrome_arr.push(create_palindrome_str(getRandomBetTwoValue(3, data_len)))
+                total_palindrome_len += palindrome_arr[i].length
+            }
+        }
+
+        console.log("palindrome_arr_len: " + palindrome_arr.length)
+        console.log("total_pal_len: " + total_palindrome_len)
+        let left_over_rand_str_len = data_len - total_palindrome_len
+        console.log("left_over_len: " + left_over_rand_str_len)
+
+        let rand_str_arr = []
+        let pal_len = palindrome_arr.length
+
+        let rand_str = create_rand_str(left_over_rand_str_len)
+
+        for(let i = 0; i < pal_len; i++) {
+            rand_str_arr.push(rand_str.substr(0, getRandomBetTwoValue(0, left_over_rand_str_len)))
+            rand_str_arr.push(palindrome_arr[i])
+        }
+
+        console.log(palindrome_arr)
+        console.log(rand_str_arr)
+        return rand_str_arr.join("")
+    }   
+}
+
+function create_palindrome_test_datastr(data_len) {
+    //generate random value between two numbers
+    function getRandomBetTwoValue(min, max) {
+        return Math.floor(Math.random() * (max - min) + min)
+    }
+
+    function create_rand_str(len) {
+        let str = ""
+        for(let i = 0; i < len; i++) {
+            str += String.fromCodePoint(getRandomBetTwoValue(97, 122))
+        }
+        return str
+    }
+
+    let palindrome_arr = []
+    let palindrome_arr_len = getRandomBetTwoValue(1, 5)
+    let total_palindrome_len = 0
+
+    console.log("pal_count: " + palindrome_arr_len)
+    
+    for(let i = 0; i < palindrome_arr_len; i++) {
+        if(total_palindrome_len >= data_len) {
+            break
+        } else {
+            palindrome_arr.push(create_palindrome_str(getRandomBetTwoValue(3, data_len / palindrome_arr_len)))
+            total_palindrome_len += palindrome_arr[i].length
+        }
+    }
+
+    console.log("total_pal_len: " + total_palindrome_len)
+
+    let left_over_rand_str_len = data_len - total_palindrome_len
+
+    console.log("left_over_len: " + left_over_rand_str_len)
+
+    let rand_str_arr = []
+    let pal_len = palindrome_arr.length
+
+    let rand_str = create_rand_str(left_over_rand_str_len)
+    console.log("rand_str: " + rand_str)
+
+    let start = 0
+    let end = Math.floor(rand_str / pal_len);
+    for(let i = 0; i < pal_len; i++) {
+        rand_str_arr.push(rand_str.slice(start,  left_over_rand_str_len / i))
+        rand_str_arr.push(palindrome_arr[i])
+    }
+
+    console.log(palindrome_arr)
+    console.log(rand_str_arr)
+    return rand_str_arr.join("")
+}
+
+
+for(let i = 0; i < 5; i++) {
+    if(i == 3) {
+        break
+    } else {
+        console.log(i)
+    }
+}
+
+
+//Sun Nov 29 19:00:41 +06 2020
+function create_palindrome_test_datastr(data_len) {
+    //generate random value between two numbers
+    function getRandomBetTwoValue(min, max) {
+        return Math.floor(Math.random() * (max - min) + min)
+    }
+
+    function create_rand_str(len) {
+        let str = ""
+        for(let i = 0; i < len; i++) {
+            str += String.fromCodePoint(getRandomBetTwoValue(97, 122))
+        }
+        return str
+    }
+
+    let palindrome_arr = []
+    let palindrome_arr_len = getRandomBetTwoValue(1, 5)
+    let total_palindrome_len = 0
+
+    console.log("pal_count: " + palindrome_arr_len)
+    if(palindrome_arr_len == 1) {
+        return create_palindrome_str(data_len)
+    } else {
+        for(let i = 0; i < palindrome_arr_len; i++) {
+            if(total_palindrome_len >= data_len) {
+                break
+            } else {
+                palindrome_arr.push(create_palindrome_str(getRandomBetTwoValue(3, Math.floor(data_len / palindrome_arr_len))))
+                total_palindrome_len += palindrome_arr[i].length
+            }
+        }
+
+        console.log("palindrome_arr_len: " + palindrome_arr.length)
+        console.log("total_pal_len: " + total_palindrome_len)
+        let left_over_rand_str_len = data_len - total_palindrome_len
+        console.log("left_over_len: " + left_over_rand_str_len)
+
+        // let rand_str_arr = []
+        let pal_len = palindrome_arr.length
+
+        let rand_str = create_rand_str(left_over_rand_str_len)
+        console.log(rand_str)
+        let generated_str = ""
+
+        let start = 0
+        let end = rand_str.length / pal_len
+        for(let i = 0; i < pal_len; i++) {
+            generated_str += (rand_str.substr(start, end)) + (palindrome_arr[i])
+            start += pal_len
+            end += pal_len
+        }
+
+        console.log(palindrome_arr)
+        // return rand_str_arr.join("")
+        return generated_str
+    }   
+}

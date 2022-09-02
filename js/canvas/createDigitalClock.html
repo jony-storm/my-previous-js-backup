@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creating Clock</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+		}
+
+		html, body {
+			height: 100%;
+			width: 100%;
+		}
+
+		canvas {
+			border:1px solid black;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="500" height= "500">
+		Your browser does not support the canvas element
+	</canvas>
+	<img id="img">
+	<script>
+		let canvas = document.getElementById('myCanvas')
+		let ctx = canvas.getContext('2d')
+		ctx.fillStyle = "#555555"
+	
+		//creating inner circle
+		ctx.lineWidth = 2
+		ctx.beginPath()
+		ctx.arc(250, 250, 135, 0, 2 * Math.PI);
+		ctx.fillStyle = "#666666"
+		ctx.fill()
+		ctx.closePath()
+		ctx.strokeStyle = '#222222'
+		ctx.stroke()
+
+		ctx.lineWidth = 5
+		ctx.beginPath();
+		ctx.arc(250, 250, 115, 0, 2 * Math.PI);
+		let gradient = ctx.createLinearGradient(0, 100, 400, 400)
+		// let gradient = ctx.createRadialGradient(200, 200, 100, 200, 200, 300)
+		gradient.addColorStop(0, '#333333')
+		gradient.addColorStop(0.6, '#111111')
+		ctx.fillStyle = gradient
+		ctx.fill();
+		ctx.closePath()
+		ctx.strokeStyle = '#333333'
+		ctx.stroke()
+
+		ctx.lineWidth = 10
+		ctx.beginPath();
+		ctx.arc(250, 250, 105, 0,  -(60 * Math.PI)/ 180, true);
+		ctx.strokeStyle = 'yellow'
+		ctx.stroke()
+		ctx.closePath()
+
+		ctx.lineWidth = 10
+		ctx.beginPath();
+		ctx.arc(250, 250, 105, 0,  (60 * Math.PI)/ 180, false);
+		ctx.strokeStyle = 'red'
+		ctx.stroke()
+		ctx.closePath()
+
+		ctx.translate(250, 250)
+		let radial_gradient = ctx.createRadialGradient(0, 0, 15, 0, 0, 30)
+		radial_gradient.addColorStop(1, '#666666')
+		radial_gradient.addColorStop(0, '#999999')
+		ctx.fillStyle = radial_gradient
+		ctx.beginPath()
+		ctx.arc(0, 0, 30, 0, 2 * Math.PI)
+		ctx.fill()
+		ctx.closePath()
+		ctx.fillStyle = 'white'
+		for(let i = 0; i < 6; i++) {
+			ctx.fillRect(96, 0, 15, 3)
+			ctx.rotate((Math.PI * 60) / 180)
+		}
+		for(let i = 0; i < 26; i++) {
+			for(let j = 0; j < 4; j++) {
+				ctx.fillRect(102, 0, 8, 2)
+				ctx.rotate((Math.PI * 15) / 180)
+			}
+		}
+
+		/*canvas.setAttribute('width', canvas.width)
+		canvas.setAttribute('height', canvas.height)
+		canvas.setAttribute('width', window.innerWidth)
+		canvas.setAttribute('height', window.innerHeight)
+
+		function resizeCanvas() {
+		canvas.setAttribute("width", window.innerWidth);
+		canvas.setAttribute("height", window.innerHeight);
+		context.fillRect(0, 0, canvas.width, canvas.height;
+		};*/
+		
+
+/*		ctx.lineWidth = 5;
+		ctx.beginPath();
+		ctx.moveTo(50, 250);
+		ctx.quadraticCurveTo(250, 100, 450, 250);
+		ctx.stroke();
+
+		ctx.lineWidth = 5;
+		ctx.beginPath();
+		ctx.moveTo(50, 250);
+		ctx.bezierCurveTo(150, 50, 350, 450, 450, 250);
+		ctx.stroke();*/
+
+		let dataURL = canvas.toDataURL()
+		img.setAttribute('src', dataURL)
+	</script>
+</body>
+</html>

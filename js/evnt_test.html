@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Event test</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			padding:0;
+		}
+		input {
+		transition: width 1s;
+		width: 100px;
+		padding:10px;
+		}
+		.wide {
+		width: 300px;
+		}
+		form, div, p {
+			border:1px solid blue;
+			padding: 10px;
+			/*overflow: scroll;*/
+		}
+
+		table, tr, td, th {
+			border:1px solid black;
+			border-collapse: collapse;
+		}
+		td,th {
+			padding:10px;
+		}
+
+		#coord {
+			width:300px;
+			height:60px;
+			padding:10px;
+			border:5px solid green;
+			overflow:scroll;
+		}
+	</style>
+</head>
+<body>
+	<p id="demo">Hello, World!</p>
+	<input type="button" id="elem" onclick="this.classList.toggle('wide')" value="Click me">
+	<form onclick="alert('this: ' + this + 'target: ' + event.target)">FORM
+		<div onclick="alert('this: ' + this + 'target: ' + event.target)">DIV
+			<p onclick="alert('this: ' + this + 'target: ' + event.target)">P</p>
+		</div>
+	</form>
+
+	<button data-toggle-id="subscribe-mail">
+		Show the subscription form
+	</button>
+	<form id="subscribe-mail" hidden>
+		Your mail: <input type="email">
+	</form>
+
+	<table id="tb">
+		<tr>
+			<th>FruitsName</th>
+			<th>Price</th>
+			<th>Rating</th>
+		</tr>
+		<tr>
+			<td>Apple</td>
+			<td>$8.99</td>
+			<td>4.00</td>
+		</tr>
+		<tr>
+			<td>Banana</td>
+			<td>$4.00</td>
+			<td>3.5</td>
+		</tr>
+	</table>
+	
+	<div>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. At neque optio, beatae illo adipisci esse sint eveniet voluptatibus quam, id nemo delectus maiores explicabo molestias officia? Obcaecati voluptas architecto, ipsum.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt nihil corporis soluta ullam, corrupti sed aliquam distinctio dicta unde voluptates eum magnam odio ratione cupiditate, eos deleniti velit consequatur nisi!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae non hic magnam veritatis amet nisi eveniet mollitia in sapiente culpa iusto, quidem modi cum sit. Neque nostrum, numquam optio a.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, quaerat, delectus facere voluptas libero ab dicta, praesentium ex qui nisi similique itaque, ullam incidunt? Ducimus enim repellendus rerum nulla temporibus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam architecto, nesciunt? Quia modi odit vitae aliquid, natus voluptas quos nostrum officia nisi inventore quam debitis fuga, veritatis eveniet dolor, ratione.
+	</div>
+	<p id="coord">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad maiores possimus praesentium consequuntur iste aut sed deserunt vitae inventore, provident quis. Perspiciatis repudiandae delectus nesciunt temporibus ipsam, recusandae adipisci illum?
+	</p>
+
+	<div>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. At neque optio, beatae illo adipisci esse sint eveniet voluptatibus quam, id nemo delectus maiores explicabo molestias officia? Obcaecati voluptas architecto, ipsum.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt nihil corporis soluta ullam, corrupti sed aliquam distinctio dicta unde voluptates eum magnam odio ratione cupiditate, eos deleniti velit consequatur nisi!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae non hic magnam veritatis amet nisi eveniet mollitia in sapiente culpa iusto, quidem modi cum sit. Neque nostrum, numquam optio a.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, quaerat, delectus facere voluptas libero ab dicta, praesentium ex qui nisi similique itaque, ullam incidunt? Ducimus enim repellendus rerum nulla temporibus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam architecto, nesciunt? Quia modi odit vitae aliquid, natus voluptas quos nostrum officia nisi inventore quam debitis fuga, veritatis eveniet dolor, ratione.
+	</div>
+
+	<div>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. At neque optio, beatae illo adipisci esse sint eveniet voluptatibus quam, id nemo delectus maiores explicabo molestias officia? Obcaecati voluptas architecto, ipsum.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt nihil corporis soluta ullam, corrupti sed aliquam distinctio dicta unde voluptates eum magnam odio ratione cupiditate, eos deleniti velit consequatur nisi!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae non hic magnam veritatis amet nisi eveniet mollitia in sapiente culpa iusto, quidem modi cum sit. Neque nostrum, numquam optio a.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, quaerat, delectus facere voluptas libero ab dicta, praesentium ex qui nisi similique itaque, ullam incidunt? Ducimus enim repellendus rerum nulla temporibus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam architecto, nesciunt? Quia modi odit vitae aliquid, natus voluptas quos nostrum officia nisi inventore quam debitis fuga, veritatis eveniet dolor, ratione.
+	</div>
+	<script>
+		demo.onclick = function() {
+			demo.style.fontSize = "50px"
+			demo.style.color = "blue"
+		}
+
+		elem.ontransitionend = function() {
+			alert("DOM property"); // doesn't work
+		};
+		elem.addEventListener("transitionend", function() {
+			alert("addEventListener"); // shows up when the animation finishes
+		});
+
+		document.body.addEventListener("mousemove", (evnt) => {
+			coord.innerHTML += "Coordinates: " + evnt.pageX + ", " + evnt.pageY
+		})
+
+		document.addEventListener('click', function(event) {
+			let id = event.target.dataset.toggleId;
+			if (!id) return;
+			let elem = document.getElementById(id);
+			elem.hidden = !elem.hidden;
+		});
+
+		tb.onmouseover = function(evt) {
+			let target = evt.target
+			target.style.background = 'pink'
+		}
+
+		tb.onmouseout = function(evt) {
+			let target = evt.target
+			target.style.background = ""
+		}
+	</script>
+</body>
+</html>
+
+<!-- 
+	with box-sizing:border-box  and overflow scroll the width and height of the paragraph demo:
+		clientHeight = 41
+		clientWidth = 324
+		offsetWidth = 341
+		offsetHeight = 58
+	without box-sizing:border-box  and overflow scroll the width and height of the paragraph demo:
+		clientHeight = 41
+		clientWidth = 339
+		offsetWidth = 341
+		offsetHeight = 43
+ -->
+
+ <!-- 
+	width:300px;
+	height:60px;
+	padding:10px;
+	border:5px solid green;
+	overflow:scroll;
+	----------------------------------------------
+	with box-sizing:border-box  and overflow scroll the width and height of the paragraph demo:
+		clientHeight = 35
+		clientWidth = 275
+		offsetWidth = 300
+		offsetHeight = 60
+	without box-sizing:border-box  and overflow scroll the width and height of the paragraph demo:
+		clientHeight = 80
+		clientWidth = 320
+		offsetWidth = 330
+		offsetHeight = 90
+  -->

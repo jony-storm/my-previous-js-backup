@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>My Users</h1>
+    <button class="btn btn-primary btn-lg" [routerLink]="'/create'">Create new user</button>
+    <table class="table table-stripped table-hover table-lg">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Full Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.id}}</td>
+                <td>{{user.fullname}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+                <td>
+                    <button class="btn btn-success" style="margin-right:5px;" [routerLink]="['/update/']" (click)="saveId(user.id)">Update</button>
+                    <button class="btn btn-danger" style="margin-right:5px;" (click)="remove(user.id)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,41 @@
+<div class="container-fluid">
+ <div class="row">
+   <div class="col-md-12 ">
+     <form [formGroup]='signupForm' (ngSubmit)='register()' method="POST" novalidate>
+      <div class="form-group">
+        <label for="fullname">Fullname: </label>
+        <input type="text" class="form-control" placeholder="Enter your fullname..." formControlName='fullname' name="fullname">
+        <div *ngIf="signupForm.get('fullname').invalid && (signupForm.get('fullname').dirty || signupForm.get('fullname').touched)" class="alert alert-danger">****Fullname is Required****</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input type="email" class="form-control" placeholder="Enter your email address..." formControlName='email' name="email">
+        <div *ngIf="signupForm.get('email').invalid && (signupForm.get('email').dirty || signupForm.get('email').touched)" class="alert alert-danger">****Email is Required****</div>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username: </label>
+        <input type="text" class="form-control" placeholder="Type a unique username" formControlName="username" name="username">
+        <div *ngIf="signupForm.get('username').invalid && (signupForm.get('username').dirty || signupForm.get('username').touched)" class="alert alert-danger">****Unique username is Required****</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password: </label>
+        <input type="password" class="form-control" placeholder="Type a password..." formControlName='password' name="password">
+        <div *ngIf="signupForm.get('password').invalid && (signupForm.get('password').dirty || signupForm.get('password').touched)">
+            <div *ngIf="signupForm.get('password').errors.required" class="alert alert-danger">****Password is Required****</div>
+            <div *ngIf="signupForm.get('password').errors.minlength || signupForm.get('password').errors.maxlength" class="alert alert-danger">****Password length have to be between 6 to 32****</div>
+        </div>
+      </div>
+
+      <div class="form-group" id="repeat">
+        <label for="repeat_password">Repeat Password: </label>
+        <input type="password" class="form-control" placeholder="Repeat password" formControlName='repeat_password' name="repeat_password">
+        <div *ngIf="signupForm.get('repeat_password').invalid && (signupForm.get('repeat_password').dirty || signupForm.get('repeat_password').touched)" class="alert alert-danger">****Repeat password is required****</div>
+      </div>
+      <button class="btn btn-primary pull-right" type="submit" [disabled]='!signupForm.valid'>SignUp</button>
+    </form>
+  </div>
+</div>
+</div>

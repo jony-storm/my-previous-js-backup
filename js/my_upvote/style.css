@@ -1,0 +1,78 @@
+* {
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+}
+
+.container {
+	margin:auto;
+	width:500px;
+	height: auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+.collector {
+	width:inherit;
+	height: inherit;
+	padding:15px;
+	margin-bottom: 10px;
+	border:1px solid lightgray;
+	border-radius: 3px;
+	overflow:hidden;
+	display: flex;
+	justify-content:space-between;
+	align-content:space-between;
+	box-shadow: 4px 4px 4px lightgray;
+}
+
+.collector:hover {
+	border:1px solid dodgerblue;
+}
+.img {
+	width:64px;
+	height: 64px;
+	margin-right:10px;
+	border-radius: 3px;
+}
+
+.info {
+	text-align: left;
+	width: 400px;
+}
+.header {
+	color:dodgerblue;
+	margin:0px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+
+.sub_img {
+	width:24px;
+	height: 24px;
+	border-radius: 50%;
+}
+small {
+	color:black;
+	font-size: 10px;
+	margin:5px;
+}
+
+.increase_vote {
+	width:auto;
+	height: 100%;
+	color: dodgerblue;
+	font-size: 15px;
+	font-weight: bold;
+	
+}
+
+.increase_vote i {
+	font-size:inherit;
+	cursor: pointer;
+	color:black;
+	display: inline;
+}

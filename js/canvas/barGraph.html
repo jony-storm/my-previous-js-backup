@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bar Graph</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+		}
+
+		html, body {
+			overflow: hidden;
+		}
+
+		canvas {
+			display: block;
+			border:1px solid black;
+			/*background-color: black;*/
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+	<script>
+		myCanvas.width = window.innerWidth
+		myCanvas.height = window.innerHeight
+
+		let w = myCanvas.width
+		let h = myCanvas.height
+		let ctx = myCanvas.getContext('2d')
+
+		let year_x = [2012, 2014, 2016, 2018]
+		let val = [200, 100, 60, 300]
+
+		function create_grid(starting_val, grid_gap, width, height, x_start=0, y_start=0) {
+			ctx.strokeStyle = 'green'
+			for(let i = starting_val; i < width; i += grid_gap) {
+				ctx.beginPath()
+				ctx.moveTo(i, x_start)
+			    ctx.lineTo(i, height)
+			    ctx.stroke()
+			    ctx.closePath()
+			}
+			
+			for(let i = starting_val; i < height; i += grid_gap) {
+				ctx.beginPath()
+				ctx.moveTo(y_start, i)
+			    ctx.lineTo(width, i)
+			    ctx.stroke()
+			    ctx.closePath()
+			}
+		}
+
+		create_grid(50, 50, w, h)
+		ctx.strokeStyle = 'red'
+		ctx.beginPath()
+		ctx.lineWidth = 2
+		ctx.moveTo(100, 0)
+		ctx.lineTo(100, h)
+		ctx.stroke()
+		ctx.closePath()
+
+		ctx.beginPath()
+		ctx.lineWidth = 2
+		ctx.moveTo(0, 500)
+		ctx.lineTo(w, 500)
+		ctx.stroke()
+		ctx.closePath()
+
+		ctx.font = "20px serif"
+		ctx.fillText(year_x[0], 230, 520)
+		ctx.fillText(year_x[1], 350, 520)
+		ctx.fillText(year_x[2], 430, 520)
+		ctx.fillText(year_x[3], 530, 520)
+
+		ctx.font = "20px serif"
+		ctx.fillText(val[0], 50, 450)
+		ctx.fillText(val[1], 50, 400)
+		ctx.fillText(val[2], 50, 350)
+		ctx.fillText(val[3], 50, 300)
+
+		ctx.globalAlpha = 0.8
+		ctx.fillStyle = "dodgerblue"
+		ctx.fillRect(200, 500, 100, -200)
+		ctx.fillRect(350, 500, 50, -100)
+		ctx.fillRect(500, 500, 100, -300)
+		ctx.fillRect(410, 500, 80, -60)
+	</script>
+</body>
+</html>

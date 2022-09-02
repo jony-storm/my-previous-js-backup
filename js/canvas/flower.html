@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creating a single flower using canvas</title>
+	<style>
+		* {
+			margin:0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		canvas {
+			background-color: lightgreen;
+			border:1px solid black;
+			margin:20px;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="flowerField"></canvas>
+	<script>
+		let context = flowerField.getContext('2d')
+		flowerField.width = "300"
+		flowerField.height = "300"
+
+
+		let w = flowerField.width
+		let h = flowerField.height
+
+		context.beginPath()
+		context.fillStyle = 'red'
+		context.arc(w / 2, h / 2, 20, 0, Math.PI * 2)
+		context.fill()
+		context.closePath()
+
+		context.globalCompositeOperation = 'destination-over'
+		context.lineWidth = 15
+		context.lineCap = 'bevel'
+		context.beginPath()
+		context.moveTo(w/2, h/2)
+		context.lineTo(110, 110)
+		context.stroke()
+		context.closePath()
+	</script>
+</body>
+</html>

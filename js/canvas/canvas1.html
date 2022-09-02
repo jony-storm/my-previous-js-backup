@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas 1</title>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+	<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+	ctx.fillStyle = "#FF0000";
+	ctx.fillRect(10, 10, 150, 75);
+	for(let i=10; i<100; i+=5) {
+		ctx.moveTo(20+i,20)
+		ctx.lineTo(50+i*3,60+(i*10))
+		ctx.stroke()
+	}
+	ctx.beginPath();
+	ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+	ctx.stroke();
+	</script>
+</body>
+</html>

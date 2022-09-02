@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Implementing advanced animation</title>
+<meta charset="utf-8">
+<style>
+	* { 
+		margin: 0; 
+		padding: 0;
+	 }
+	html, body {
+		height: 100%; width: 100%; 
+	}
+	canvas { 
+		display: block; 
+	}
+	#myCanvas {
+		background: #001022;
+	}
+	#myButtons {
+		bottom: 20px;
+		left: 20px;
+		position: absolute;
+	}
+	#myButtons button {
+		padding:5px;
+	}
+</style>
+</head>
+<body>
+<canvas id="myCanvas">
+</canvas>
+<div id="myButtons">
+	<button id="startAnimation" onclick="start_animate()">StartAnimation</button>
+	<button id="stopAnimation" onclick="stop_animate()">StopAnimation</button>
+</div>
+<script type="text/javascript" src="asteroid.js"></script>
+
+</body>
+</html>

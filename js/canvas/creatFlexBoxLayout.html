@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Creating Flex Box Layout Using Canvas</title>
+	<style>
+		canvas {
+			border:1px solid black;
+			display: block;
+			/*resize: both;*/
+		}
+	</style>
+</head>
+<body>
+	<canvas id="flex_container"></canvas>
+	<script>
+		let c = flex_container.getContext('2d')
+		flex_container.width = '500'
+		flex_container.height = '500'
+
+		let w = flex_container.width
+		let h = flex_container.height
+
+		function drawSquare(pos_x, pos_y, width, height) {
+			c.strokeStyle = 'green'
+			c.strokeRect(pos_y, pos_y, width, height)
+		}
+
+		function createFlexBox(sq_w, sq_h, total_sq, sq_x = 0, sq_y = 0) {
+
+			let total_sq_w = sq_w * total_sq
+			let total_sq_h = sq_h * total_sq
+
+			let canv_w = w - total_sq_w
+			let canv_h = h - total_sq_h
+
+			for(let i = 0; i < total_sq; i++) {
+				let start_x = sq_x
+				drawSquare(start_x, sq_y, sq_w, sq_h)
+				// start_x += sq_w + (canv_w / total_sq - 1)
+
+				start_x += 150
+			}
+		}
+		createFlexBox(100, 100, 3)
+	</script>
+</body>
+</html>

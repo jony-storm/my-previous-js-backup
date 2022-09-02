@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Creating a grid</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        html, body {
+            overflow: hidden;
+        }
+
+        #myCanvas {
+            display: block;
+            border:1px solid black;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas">
+        your browser doesn't support canvas
+    </canvas>
+    <script>
+        let canvas = document.getElementById('myCanvas')
+        let ctx = canvas.getContext('2d')
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        let w = canvas.width / 2
+        let h = canvas.height - 50
+
+        ctx.strokeStyle = 'white'
+        
+        ctx.beginPath()
+        ctx.moveTo(w, 0)
+        ctx.lineTo(w, h)
+        ctx.stroke()
+        ctx.closePath()
+
+        function find_X_Coord(y, x1, y1, x2, y2) {
+            return (((x1 - x2)*(y - y1)) / (y1 - y2)) + x1
+        }
+
+        //line start
+
+        ctx.beginPath()
+        ctx.moveTo(w, 50)
+        ctx.lineTo(w - 50, h)
+        ctx.stroke()
+        ctx.closePath()
+
+        ctx.beginPath()
+        ctx.moveTo(678, 100)
+        ctx.lineTo(w - 100, h)
+        ctx.stroke()
+        ctx.closePath()
+
+        ctx.beginPath()
+        ctx.moveTo(678, 100)
+        ctx.lineTo(w - 100, h)
+        ctx.stroke()
+        ctx.closePath()
+
+        let x1 = 683
+        let x2 = x1 - 50
+        let y1 = 50
+        let y2 = h
+        /*ctx.beginPath()
+        ctx.moveTo(find_X_Coord(y + 50, x, 100, w - 100, h), 150)
+        ctx.lineTo(w - 150, h)
+        ctx.stroke()
+        ctx.closePath()*/
+
+        /*for(let i = 0; i < 10; i++) {
+            let x = find_X_Coord(y1, x1, y1, x2, y2)
+            ctx.beginPath()
+            ctx.moveTo(x, y1)
+            ctx.lineTo(x2, y2)
+            console.log(x)
+            ctx.stroke()
+            ctx.closePath()
+            x1 -= 50
+            x2 -= 50
+            y1 += 50
+        }*/
+    </script>
+
+</body>
+</html>

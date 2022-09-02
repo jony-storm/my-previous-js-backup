@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 
+    Features to add
+        ** snapping
+        ** grow line from start or endpoint
+     -->
+
+
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="    width=device-width, initial-scale=1.0"> -->
+    <title>Drawing Straight Line Using Canvas</title>
+    <style>
+        
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        html, body {
+            /*overflow: hidden;*/
+        }
+
+        canvas {
+            float:left;
+            /*display: block;*/
+            border:1px solid black;
+            background-color: black;
+            /*margin:50px;*/
+        }
+        
+        #clear {
+            width:100px;
+            font-size: 2em;
+        }
+        #rightsidebar {
+            width:180px;
+            height: 500px;
+            float: left;
+            background-color: #222;
+            color:white;
+            border-right: 5px solid #ccc;
+            /*border:2px solid green;*/
+        }
+
+        h2 {
+            background-color: darkgray;
+        }
+        #title {
+            text-align: center;
+            width:985px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <h2 id="title">Welcome to Drawing Program</h2>
+        <div id="rightsidebar">
+            <h2>Drawing Control</h2>
+            <h3 >Drawing mode</h3>
+            <span id="mode">Arbitrary mode</span>
+        </div>
+        <canvas id="canv">
+            Your browser doesn't support canvas??
+        </canvas>
+    </div>
+    <!-- <div id="poscheck"></div> -->
+    <script>
+        let context = canv.getContext('2d')
+        canv.width = "800"
+        canv.height = '500'
+
+        let off_x = canv.offsetLeft
+        let off_y = canv.offsetTop
+
+        context.strokeStyle = "white"
+        context.lineWidth = "2"
+        context.moveTo(0,0)
+        let w = canv.width
+        let h = canv.height
+        let linedrawn = []
+        let undostack = []
+        let redostack;
+
+
+        // clear screen
+        /*clear.onclick = function () {
+
+        }*/
+        function drawLine(x1, y1, x2, y2) {
+            context.beginPath()
+            context.strokeStyle = "white"
+            context.moveTo(x1, y1)
+            context.lineTo(x2, y2)
+            context.stroke()
+            context.closePath()
+            // console.log({x1,y1,x2, y2})
+            //linedrawn.push({x1, y1, x2, y2})
+        }
+        
+
+        function drawCircle(cx,cy, color="white") {
+            context.beginPath()
+            context.strokeStyle = color
+            context.arc(cx, cy, 8, 0, Math.PI*2)
+            context.stroke()
+            context.closePath()
+        }
+
+        function distance(x1,y1, x2, y2) {
+            return Math.sqrt((x1-x2)**2 + (y1-y2)**2)
+        }
+        // spaning
+        function snap(x,y, min_dis = 16) {
+                //let min_dis = 16
+                let snap_point
+                let lowdist = Infinity
+                let mid_point
+                let dist
+                linedrawn.forEach(ele=> {
+                    mid_point = {x:(ele.x1+ele.x2)/2, y:(ele.y1+ele.y2)/2}
+                    dist = distance(x,y,mid_point.x,mid_point.y)
+                    if (dist < min_dis) {
+                        // min_dist = dist1
+                        if(dist < lowdist) {
+                            lowdist = dist
+                            snap_point = mid_point
+                        }
+                        
+                    }
+                    
+                })
+                if(!snap_point){
+                    return undefined
+                }
+                return snap_point
+        }
+        
+        var keyname = ""
+        let x1=0, x2=0, y1=0, y2 = 0
+        /*canv.onmousemove = function (evt) {
+            if(evt.ctrlKey && !evt.altKey) {
+                console.log(evt.clientX + ", " + evt.clientY)
+                drawLine(x1, y1, evt.clientX, evt.clientY)
+            }
+        }*/
+
+        canv.onclick = function(evt) {
+            //console.log(evt)
+            if (evt.altKey && evt.ctrlKey) {
+                if (evt.shiftKey) {
+                    x1 = evt.pageX - off_x
+                    y1 = evt.pageY - off_y
+                    let sn = snap(x1, y1,30)
+                    if(sn){
+                        x1 = sn.x
+                        y1 = sn.y
+                        drawCircle(x1,y1, 'red')
+                    }
+                    // return
+                } else {
+                    // console.log(evt)
+                    x1 = evt.pageX - off_x
+                    y1 = evt.pageY - off_y
+                    drawCircle(x1,y1)
+                }
+                
+                
+                
+            }
+            else if (evt.ctrlKey) {
+
+                m_x = evt.pageX - off_x
+                m_y = evt.pageY - off_y
+                if(evt.shiftKey) {
+                    // console.log("snapp ctrl+shift")
+                    let sn = snap(m_x, m_y,30)
+                    if(sn) {
+                        m_x = sn.x
+                        m_y = sn.y
+                        drawCircle(m_x,m_y, "green")
+                    }
+                }
+                if(keyname=="H") {
+                    x2 = m_x
+                    y2= y1 //= evt.clientY
+                    drawLine(x1, y1, x2, y2)
+                    linedrawn.push({x1, y1, x2, y2})
+                    drawCircle(x2,y2)
+                } else if (keyname=="V") {
+                    x2 = x1 //evt.clientX
+                    y2= m_y
+                    drawLine(x1, y1, x2, y2)
+                    linedrawn.push({x1, y1, x2, y2})
+                    drawCircle(x2,y2)
+                } else if (keyname=="X") {
+                    x2 = m_x
+                    y2 = m_y
+                    //let ele = linedrawn[linedrawn.length-1]
+                    linedrawn.forEach(ele=> {
+                        //console.log(ele.x1, ele.y1, ele.x2, ele.y2, x1, x2, y1, y2)
+                        // console.log(ele)
+                        find_cross_point(ele.x1, ele.y1, ele.x2, ele.y2, x1, y1, x2, y2)
+                    })
+                    let j;
+                    
+                    for(j = 0; j < linedrawn.length; j++) {
+                        let ele = linedrawn[j]
+                        let deleted = find_cross_point(ele.x1, ele.y1, ele.x2, ele.y2, x1, y1, x2, y2)
+                        if (deleted) {
+                            undostack.push({action:'del',data:{x1:ele.x1, y1:ele.y1, x2:ele.x2, y2:ele.y2}})
+                            linedrawn.splice(j,1)
+                            context.fillStyle = "black"
+                            context.fillRect(0,0,800, 500)
+                            linedrawn.forEach(ele=>drawLine(ele.x1, ele.y1, ele.x2, ele.y2))
+                            break;
+                        }
+
+                    }
+                } else {
+                    x2 = m_x
+                    y2 = m_y
+                    drawLine(x1, y1, x2, y2)
+                    linedrawn.push({x1, y1, x2, y2})
+                    undostack.push({action:'draw',data:{x1, y1, x2, y2}})
+                    drawCircle(x2,y2)
+                }
+                
+                x1 = x2
+                y1 = y2
+            }
+            
+        }       
+
+        window.onkeyup = function(evt) {
+            if(evt.key == 'H') {
+                mode.innerText = 'Horizontal line draw mode'
+                keyname = "H"
+            } else if(evt.key == 'V') {
+                mode.innerText = 'Vertical line draw mode'
+                keyname = "V"
+            } else if (evt.key == 'X') {
+                mode.innerText = 'Line deletion mode'
+                keyname = "X"
+            }
+            else if (evt.key == 'R') {
+                mode.innerText = 'Arbitrary line draw mode'
+                keyname = ""
+            } else if (evt.key == 'z' && evt.ctrlKey) { // undoing things
+                undo();
+            } else if (evt.key == 'Z' && evt.ctrlKey) { // undoing things
+                redo();
+            }
+        }
+
+        //find the intersection of two line
+        function find_cross_point(x1,y1,x2,y2, x3,y3,x4,y4) {
+            let dx1 = (x1 - x2)
+            let dx2 = (x3-x4)
+            let dy1 = (y1 - y2)
+            let dy2 = (y3 - y4)
+
+            let m1 = dy1 / dx1,
+                m2 = dy2 / dx2,
+                c1 = (y1 - m1*x1),
+                c2 = (y3 - m2*x3)
+            //vertical line
+            if (dx1 == 0 || dx2 == 0) {
+
+            } else if (dy1 == 0 || dy2 == 0) {
+
+            }
+
+            
+            let y = (m1*c2 - m2*c1) / (m1 - m2)
+            let x = (c1 - c2) / (m2 - m1)               
+            let min_bet_x1_x2 = x1 < x2 ? x1:x2
+            let min_bet_y1_y2 = y1 < y2 ? y1:y2
+            let max_bet_x1_x2 = x1 > x2 ? x1:x2
+            let max_bet_y1_y1 = y1 > y2 ? y1:y2
+
+            let min_bet_x3_x4 = x3 < x4 ? x3:x4
+            let min_bet_y3_y4 = y3 < y4 ? y3:y4
+            let max_bet_x3_x4 = x3 > x4 ? x3:x4
+            let max_bet_y3_y4 = y3 > y4 ? y3:y4
+
+            drawLine(x3,y3,x4,y4)
+            if ((x>=min_bet_x1_x2 && x<=max_bet_x1_x2) && (y>=min_bet_y1_y2 && y<=max_bet_y1_y1) && (x>=min_bet_x3_x4 && x<=max_bet_x3_x4) && (y>=min_bet_y3_y4 && y<=max_bet_y3_y4)) {
+                console.log("cross point: ",x, y)
+                drawCircle(x,y)
+                return true;
+            }
+        }
+
+
+        function undo() {
+            let itm = undostack.pop()
+            if(!itm)
+                return
+            if (itm.action == "draw") {
+                // if last action was drawing then remove
+                // itm.data = linedrawn.pop().data
+                linedrawn.pop()
+                console.log("deleting line")
+                console.log(itm.data)
+                // now draw all
+                context.fillStyle = "black"
+                context.fillRect(0,0,800, 500)
+                linedrawn.forEach(ele=>drawLine(ele.x1, ele.y1, ele.x2, ele.y2))
+                itm.action='del'
+                redostack = itm
+            } else {
+                let ele = itm.data
+                drawLine(ele.x1, ele.y1, ele.x2, ele.y2)
+                linedrawn.push({x1:ele.x1, y1:ele.y1, x2:ele.x2, y2:ele.y2})
+                itm.action = 'draw'
+                redostack =itm
+            }
+            
+            console.log("undoing...")
+        }
+        function redo() {
+            let itm = redostack
+            if(!itm)
+                return
+            if (itm.action == "draw") {
+                // if last action was drawing then remove
+                itm.data = linedrawn.pop().data
+                // now draw all
+                context.fillStyle = "black"
+                context.fillRect(0,0,800, 500)
+                linedrawn.forEach(ele=>drawLine(ele.x1, ele.y1, ele.x2, ele.y2))
+                itm.action='del'
+                undostack.push(itm)
+            } else {
+                let ele = itm.data
+                drawLine(ele.x1, ele.y1, ele.x2, ele.y2)
+                linedrawn.push({x1:ele.x1, y1:ele.y1, x2:ele.x2, y2:ele.y2})
+                itm.action = 'draw'
+                undostack.push(itm)
+            }
+            
+            console.log("redoing...")
+        }
+    </script>
+</body>
+</html>

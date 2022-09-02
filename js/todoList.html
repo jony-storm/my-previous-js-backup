@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TodoList</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		.container {
+			width: 300px;
+			height: 400px;
+			overflow: auto;
+			outline: 2px solid blue;
+			margin:20px;
+			padding:5px;
+		}
+		label, #inp {
+			margin-left:20px;
+		}
+		#inp {
+			padding:10px;
+			outline: 2px solid blue;
+		}
+		li {
+			margin-bottom: 2px;
+			padding:5px;
+			background: cyan;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ol id="ordered"></ol>
+	</div>
+	<label for="inp" style="font-weight: bold;">Type: </label>
+	<input type="text" id="inp" size="30" onkeydown="onenter(event.key)">
+	<script>
+		var container = document.getElementsByClassName('container')
+		var ordered = document.getElementById("ordered")
+		var inp = document.getElementById("inp")
+
+		function append_list() {
+			var now = new Date()
+			var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + ", " + now.getMilliseconds()
+			console.log(time)
+			var list = document.createElement("li")	
+			list.innerHTML = inp.value
+			ordered.appendChild(list)
+		}
+		function onenter(key) {
+			if(key == "Enter") {
+				append_list()
+				inp.value = ""
+			}
+		} 
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="text-center price-headline">View Profile</h3>
+            <hr class="first">
+            <hr class="second">
+            <hr class="third">
+        </div>
+    </div>
+    <div class="row profile">
+        <div *ngFor="let profile of profiles; let i = index" class="col-xs-12 col-md-6 col-xl-4">
+            <div class="card">   
+                <img class="card-img-top img-fluid" src="../../assets/imgs/jon.png"/>   
+                <div class="card-block"> 
+                    <h2 class="card-title">{{ profile.fullname }}</h2>
+                    <p  class="card-text">Username: {{ profile.username }}</p>    
+                    <p  class="card-text">Email: {{ profile.email }}</p>    
+                    <a  href="#" class="btn  btn-primary">Follow</a> 
+                </div>  
+            </div>
+        </div>  
+    </div>
+    <hr class="third">
+    <hr class="second">
+    <hr class="first" style="margin-bottom: 20px">
+</div>

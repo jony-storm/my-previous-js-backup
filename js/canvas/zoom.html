@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="	width=device-width, initial-scale=1.0">
+	<title>Zooming an image</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+		}
+		.canv {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="zoom" class="canv">
+		Your browser doesn't support canvas??
+	</canvas>
+	<span id="pos"></span>
+	<script>
+		let context = zoom.getContext('2d')
+		zoom.width = '800'
+		zoom.height = '800'
+		let image = new Image()
+		image.src = '../../images/flower-scheme-1-opt.png'
+		window.onload = () => {
+			context.drawImage(image, 0, 0, image.width, image.height)
+		}
+
+		context.shadowBlur = 15
+		context.shadowOffsetX = 5
+		context.shadowOffsetY = 5
+		context.shadowOffsetX = 5
+		context.shadowOffsetY = 5
+		context.shadowColor = 'rgba(0, 0, 0, 0.8)'
+
+
+		zoom.addEventListener('click', (evt) => {
+				let pos_x = evt.pageX
+				let pos_y = evt.pageY
+				context.drawImage(image,pos_x - 10, pos_y - 10, 10, 10, pos_x - 50, pos_y - 50, 100, 100)
+		})
+
+	</script>
+</body>
+</html>

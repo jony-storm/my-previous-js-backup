@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DrawTable</title>
+</head>
+<body>
+    <div id="draw">
+        
+    </div>
+ <script type="text/javascript">
+     var table = [["Name", "Roll", "Grade"], ["Wakia", "4", "5.00"], ["Jean", "10", "4.94"], ["Ava", "5", "5.00"], ["Evee", "8", "5.00"], ["Shoshana", "9", "4.86"]]
+     var draw = document.getElementById("draw")
+     /*function drawTable(table_info) {
+         let len = table_info.length
+         let max = 15 
+         for(let i = 0; i < table_info.length; i++) {
+                document.write("+" + "-".repeat(max))
+                document.write("<br>")
+             for(let j = 0; j < table_info[i].length; j++) {
+                 document.write("| " + table_info[i][j] + " |")
+                 document.write("<br>")
+             }
+         }   
+         document.write("+" + "-".repeat(max))
+         for(let i of table_info) {
+            i.map((elm) => {
+            })
+         }
+     }
+*/
+     function drawTable(table_info) {
+         let len = table_info.length
+         let max = 0
+         // table.map(item => {if(item[0].length > max) max = item[0].length}, 1)
+         let pre = document.createElement("pre")
+         pre.innerHTML += "+" + "-".repeat(15) + "+" + "-".repeat(table[0][1].length) + "+" + "-".repeat(table[0][2].length) + "+" + "<br>"
+         for(let i = 0; i < len; i++) {
+             let nam, roll, grade;
+             if(table[i][0].length != 15) {
+                 nam = table[i][0].concat(" ".repeat(15 - table[i][0].length))
+             } else {
+                 nam = table[i][0]
+             }
+
+             if(table[i][1].length != 15) {
+                 roll = table[i][1].concat(" ".repeat(15 - table[i][1].length))
+             } else {
+                 roll = table[i][1]
+             }
+
+             if(table[i][2].length != 15) {
+                 grade = table[i][2].concat(" ".repeat(15 - table[i][2].length))
+             } else {
+                 grade = table[i][2]
+             }
+             // document.write()
+             pre.innerHTML += "| " + nam + " |" + roll + "| " + grade + " |" + "<br>"
+             pre.innerHTML += "+" + "-".repeat(15) + "+" + "-".repeat(table[0][1].length) + "+" + "-".repeat(table[0][2].length) + "+" + "<br>"
+            draw.appenChild(pre)
+
+         }
+     }
+
+     drawTable(table)
+ </script>
+  
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Test</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="1000" height="600" style="border:1px solid black;">
+		Your browser does not support the canvas element
+	</canvas>
+	<script>
+		let canvas = document.getElementById('myCanvas')
+		let ctx = canvas.getContext('2d')
+		/*ctx.fillStyle = "#ff0000"
+		ctx.fillRect(50, 50, 150, 75)
+
+		ctx.moveTo(50, 210)
+		ctx.lineTo(200, 100)
+		ctx.stroke()
+
+		ctx.beginPath();
+		ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+		ctx.stroke();*/
+
+		// Create lineargradient
+		// var grd = ctx.createLinearGradient(0, 0, 200, 0); x, y, x1, y1
+		/*var grd = ctx.createLinearGradient(0, 0, 200, 0);
+		grd.addColorStop(0, "red");
+		grd.addColorStop(0.5, "white");
+		grd.addColorStop(1, "red")
+		ctx.fillStyle = grd;
+		ctx.fillRect(10, 10, 150, 80);*/
+
+
+		//radial x, y, x1, y1, r
+		/*var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+		grd.addColorStop(0, "red");
+		grd.addColorStop(1, "white");
+		ctx.fillStyle = grd;
+		ctx.fillRect(10, 10, 150, 80);*/
+
+		// text
+		/*ctx.font = "100px Arial"
+		ctx.fillText("Hello World", 300, 300)
+		ctx.font = "100px Arial"
+		ctx.strokeText("Hello World", 300, 300)*/
+
+		//filter
+		ctx.shadowBlur = 30
+		ctx.shadowColor = "black"
+		ctx.shadowOffsetX = 10
+		ctx.shadowOffsetY = 10
+		ctx.fillStyle = "dodgerblue"
+		ctx.fillRect(50, 200, 200, 100)
+
+		/*var img = document.getElementById("lamp");
+		var pat = ctx.createPattern(img, "repeat");
+		ctx.rect(0, 0, 150, 100);
+		ctx.fillStyle = pat;
+		ctx.fill();*/
+
+
+		ctx.font = 'bold 140px Times'
+		ctx.textBaseLine = 'alphabetic'
+		ctx.textAlign = 'center'
+		ctx.shadowBlur = 0
+		ctx.shadowOffsetX = 0
+		ctx.shadowOffsetY = 0
+		ctx.fillStyle = "dodgerblue"
+		ctx.strokeText('WickerpediA', 500, 100)
+		ctx.fillText('WickerpediA', 500, 100)
+
+		/*let point = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+       				 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+       				 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+       				 [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+       				 [4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+       				 [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+       				 [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+       				 [7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+       				 [8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
+       				 [9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]*/
+	</script>
+</body>
+</html>

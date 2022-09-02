@@ -1,0 +1,30 @@
+<div class="container-fluid">
+ <div class="row">
+   <div class="col-md-12">
+     <form [formGroup]="loginForm" (ngSubmit)='login()' class="form" method="POST" novalidate>
+      <div class="form-group">
+        <label for="username">Username: </label>
+        <input type="text" class="form-control" placeholder="Enter your username here..." formControlName='username' name="username">
+        <div *ngIf="loginForm.get('username').invalid && (loginForm.get('username').dirty || loginForm.get('username').touched)" class="alert alert-danger">****Username is Required****</div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password: </label>
+        <input type="password" class="form-control" placeholder="Type a strong password" formControlName='password' name="password">
+        <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+            <div *ngIf="loginForm.get('password').errors.required" class="alert alert-danger">****Password is Required****</div>
+            <div *ngIf="loginForm.get('password').errors.minlength || loginForm.get('password').errors.maxlength" class="alert alert-danger">****Password length have to be between 6 to 32****</div>
+        </div>
+      </div>
+      <div>
+        <input type="checkbox" name="remember_me" id="remember_me">
+        <label for="remember_me">Remember me</label>
+        <p id="sign_up">Not a member? <a [routerLink]="'/sign_up'" style="color:dodgerblue; font-size:17px;">SignUP</a></p>
+      </div>
+      <button type="submit" [disabled]='!loginForm.valid' class="btn btn-primary pull-right">LogIn</button>
+    </form>
+    <!-- <div style="font-size:30px; color:white">
+      {{ loginForm.vlaue | json }}
+    </div> -->
+  </div>
+</div>
+</div>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Creating a grid</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        html, body {
+            overflow: hidden;
+        }
+
+        #myCanvas {
+            display: block;
+            border:1px solid black;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas">
+        your browser doesn't support canvas
+    </canvas>
+    <script>
+        let canvas = document.getElementById('myCanvas')
+        let ctx = canvas.getContext('2d')
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        let w = canvas.width / 2
+        let h = canvas.height
+
+        ctx.strokeStyle = 'white'
+        h = h - 50
+        
+        ctx.beginPath()
+        ctx.moveTo(w, 50)
+        ctx.lineTo(w, h)
+        ctx.stroke()
+        ctx.closePath()
+
+        let verticalPoint = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500]
+        let horizontalPoint = [633, 583, 533, 483, 433, 383, 333, 283, 233, 183]
+        let len = horizontalPoint.length
+        let inc = 100
+
+        for(let i = 0; i < len; i++) {
+            ctx.beginPath()
+            ctx.moveTo(w, verticalPoint[i])
+            ctx.lineTo(horizontalPoint[i], h)
+            ctx.stroke()
+            ctx.closePath()
+
+            ctx.beginPath()
+            ctx.moveTo(w, verticalPoint[i])
+            ctx.lineTo(horizontalPoint[i] + inc, h)
+            ctx.stroke()
+            ctx.closePath()
+            inc += 100
+        }
+
+        ctx.beginPath()
+        ctx.moveTo(633, h)
+        ctx.lineTo(683, h  - 7)
+        ctx.stroke()
+        ctx.closePath()
+
+        ctx.beginPath()
+        ctx.moveTo(683 + 50, h)
+        ctx.lineTo(683, h  - 7)
+        ctx.stroke()
+        ctx.closePath()
+
+        for(let i = 10; i > 0; i--) {
+            ctx.beginPath()
+            ctx.moveTo(horizontalPoint[i], h)
+            ctx.lineTo(horizontalPoint[i - 1], h - 7)
+            ctx.stroke()
+            ctx.closePath()
+        }
+
+        for(let i = 0; i < 10; i++) {
+            ctx.beginPath()
+            ctx.moveTo(w*2 - horizontalPoint[i], h)
+            ctx.lineTo(w*2 - horizontalPoint[i - 1], h - 7)
+            ctx.stroke()
+            ctx.closePath()
+        }
+    </script>
+
+</body>
+</html>

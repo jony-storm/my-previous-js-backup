@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Color Changing Game</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0;
+         }
+        html, body {
+            height: 100%; width: 100%; 
+        }
+        canvas { 
+            display: block; 
+            margin:20px auto;
+        }
+        #myCanvas {
+            background: #001022;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas">
+        You browser doesn't support canvas. Please update your browser!
+    </canvas>
+
+    <script>
+        myCanvas.width = '500'
+        myCanvas.height = '500'
+        var c = myCanvas.getContext('2d')
+
+        var canvasW = myCanvas.width
+        var canvasH = myCanvas.height
+
+        let color_arr = ['red', 'green', 'blue', 'yellow', 'cyan']
+
+        let rand_x = []
+        let rand_y = []
+
+        function createEnv() {
+            for(let i = 0; i < 5; i++) {
+                rand_x[i] = Math.floor(Math.random() * 30) * Math.floor(Math.random() * 20) + 100
+                rand_y[i] = Math.floor(Math.random() * 30) * Math.floor(Math.random() * 20) + 50
+                c.fillStyle = color_arr[i]
+                c.fillRect(rand_x[i], rand_y[i], 100, 50)
+            }
+        }
+
+        createEnv()
+        /*function showMessage() {
+            for(let)
+        }*/
+
+    </script>
+</body>
+</html>

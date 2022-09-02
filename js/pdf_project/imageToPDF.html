@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ImageTOPdf</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #525659;
+			padding-top: 50px;
+		}
+		
+		#header {
+			width:100%;
+			height: 50px;
+			background-color: #323639;
+			display: inline-flex;
+			justify-content: space-between;
+			align-content: space-between;
+			padding:15px 0;
+			color:white;
+			font-size: 13px;
+			box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
+			z-index: 50;
+			position: fixed;
+			top: 0;
+  			transition: top 0.2s ease-in-out;
+		}
+		
+		.scroll_up {
+			top: -50px;
+		}
+
+		#icon2 {
+			position: fixed;
+			bottom: 30px;
+			right:20px;
+			cursor: pointer;
+		}
+
+		#img_container {
+			width:800px;
+			height: auto;
+			margin:auto;
+			position: relative;
+			/*top:10px;*/
+		}
+
+		.pdf_page {
+			width:800px;
+			height: auto;
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 10px;
+			box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.4);
+		}
+
+	</style>
+</head>
+<body>
+	<div id="header">
+		<span id="b_title" style="margin-left:20px;">Modern Robotics.pdf</span>
+		<span id="p_num">1/14</span>
+		<div id="img" style="margin-right:20px;">
+			<img src="icon2.png" alt="not found">
+		</div>
+	</div>
+
+	<div id="img_container"></div>
+
+	<div id="icon2">
+		<img src="icon.png" alt="not found">
+	</div>
+
+	<script>
+		let image_src_str = ['ab6687090_197320-0.png', '1609c4432_197320-1.png', '98b003e13_197320-2.png', 'ce6d9f224_197320-3.png',' 99eda70b1_197320-4.png', 'ad8439bb6_197320-5.png', 'bc71082a2_197320-6.png', '52be66250_197320-7.png', '534073fd0_197320-8.png', 'ad09e1243_197320-9.png', '40bc6b12a_197320-10.png', '4e9f2360d_197320-11.png', 'c80f6f470_197320-12.png', 'ec7ed12f6_197320-13.png']
+
+		let len = image_src_str.length
+		for(let i = 0; i < len; i++) {
+			let img = document.createElement('img')
+			img.setAttribute('src', image_src_str[i])
+			img.setAttribute('class', 'pdf_page')
+			img_container.append(img)
+		}
+
+		/*var prevScrollpos = window.pageYOffset;
+		var stick = true
+		window.onscroll = function() {
+		var currentScrollPos = window.pageYOffset;
+			if (prevScrollpos > currentScrollPos && stick == true) {
+		    	document.getElementById("header").style.top = "0";
+		    	document.getElementById('header').style.transition = '0.6s'
+		    	stick = false
+			}
+
+			if (prevScrollpos < currentScrollPos && stick == false) {
+		    	document.getElementById("header").style.top = "0";
+		    	document.getElementById('header').style.transition = '0.6s'
+		    	stick = true
+			} 
+			prevScrollpos = currentScrollPos;
+		}*/
+
+		var prevScrollpos = window.pageYOffset;
+		var scroll_ele = document.getElementById("header")
+
+		window.onscroll = function() {
+			var currentScrollPos = window.pageYOffset;
+			if (prevScrollpos > currentScrollPos) {
+				scroll_ele.style.opacity = '0'
+				scroll_ele.style.transition = '0.5s'
+			}
+			prevScrollpos = currentScrollPos;
+		}
+
+		window.onmouseover = function(evt) {
+			if(evt.pageY <= 30) {
+				scroll_ele.style.opacity = '1'
+				scroll_ele.style.transition = '0.5s'
+			}
+		}
+	</script>
+</body>
+</html>
+
+
+<!-- var graph_data = [{node_name:"Alice", friend_list:["Bob", "Charles", "Dill", "Charlie"]}, {node_name:"Bob", friend_list:["Alice", "Bob2", "Dill", "Charlie"]}, {node_name:"Bob2", friend_list:["Bob"]}, {node_name:"Charles", friend_list:["Hob", "Charlie", "Alice"]}, {node_name:"Dill", friend_list:["Alice", "Bob", "Charlie"]}, {node_name:"Hob", friend_list:["Charles","Dillan"]}, {node_name:"Dillan", friend_list:["Hob", "Charles"]}, {node_name:"Charlie", friend_list:["Alice", "Bob", "Dill", "Charles"]}] -->

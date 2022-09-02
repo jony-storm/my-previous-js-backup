@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw Rectangle Around a Blob</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        html, body {
+            overflow: hidden;
+        }
+
+        #myCanvas {
+            display: block;
+            border:1px solid black;
+            background-color: #001022;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas">
+        your browser doesn't support canvas
+    </canvas>
+    <script>
+        let canvas = document.getElementById('myCanvas')
+        let ctx = canvas.getContext('2d')
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+
+        //list of the x and y coordination
+        let x_coord = []
+        let y_coord = []
+        let points_count = 30
+
+        for(let i = 0; i < points_count; i++) {
+            let x = Math.floor(Math.random() * 200 + 1)
+            let y = Math.floor(Math.random() * 200 + 1)
+            x_coord[i] = x
+            y_coord[i] = y
+        } 
+
+        let min_x, min_y, max_x, max_y
+
+        min_x = x_coord[0]
+        max_x = x_coord[0]
+        min_y = y_coord[0]
+        max_y = y_coord[0]
+
+        //find the minimum x and maximum x
+        for(let i = 1; i < points_count; i++) {
+           if (x_coord[i] > min_x && x_coord[i] > max_x) {
+               max_x = x_coord[i]
+           } else if(x_coord[i] < min_x && x_coord[i] < max_x) {
+               min_x = x_coord[i]
+           }
+        }
+
+        //find the minimum y and maximum y
+        for(let i = 1; i < points_count; i++) {
+           if (y_coord[i] > min_y && y_coord[i] > max_y) {
+               max_y = y_coord[i]
+           } else if(y_coord[i] < min_y && y_coord[i] < max_y) {
+               min_y = y_coord[i]
+           }
+        }
+
+        console.log("min_x: " + min_x + " max_x: " + max_x)
+        console.log("min_y: " + min_y + " max_y: " + max_y)
+
+        //points radius
+        let radius = 10
+
+        // because of radius you have to plus minus the values
+        min_x = min_x - radius
+        min_y = min_y - radius
+        max_x = max_x + radius
+        max_y = max_y + radius
+
+        //translate the canvas 
+        ctx.translate(200, 200)
+
+        //draw the points
+        ctx.strokeStyle = 'white'
+        for(let i = 0; i < points_count; i++) {
+            ctx.beginPath()
+            ctx.arc(x_coord[i], y_coord[i], radius, 0, Math.PI * 2)
+            ctx.stroke()
+            ctx.closePath()
+        }
+
+        //draw the square
+        ctx.strokeStyle = 'yellow'
+        ctx.lineWidth = 2
+        ctx.strokeRect(min_x, min_y, (max_x - min_x), (max_y - min_y))
+    </script>
+</body>
+</html>

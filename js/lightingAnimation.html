@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>LightingAnimation</title>
+	<style>
+		#container {
+			background:grey;
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<p id="anim"></p>
+	</div>
+
+	<script>
+		var anim = document.getElementById("anim")
+		var color = ["magenda", "blue", "cyan", "green", "orange", "red", "yellow"]
+		function animation(str) {
+			var spl = str.split(" ")
+			var len = spl.length
+			for(let i = 0; i < len; i++) {
+				spl[i] = "<span style='color:" + color[Math.floor(Math.random() * 7)] + ";'>" + spl[i] + "</span> "
+			}
+			return spl.join(" ")
+		}
+
+		anim.innerHTML = animation("another one bite the dust ooh why can't i conquer you might have thought that we're one but i have to fight without weapon cause i am like a rubber band until you pull too hard i got an elastic heart and i may snap and i move fast you won't see me fall apart")
+
+	</script>
+	<!-- <span style='color:green;'>I</span>  <span style='color:orange;'>am</span>  <span style='color:yellow;'>wakia</span>  <span style='color:violet;'>akter</span>  <span style='color:yellow;'>belly</span> -->
+</body>
+</html>
